@@ -7,7 +7,13 @@ var UserSchema = Schema({
     name: String,
     nick: String,
     email: String,
-    password: String    
+    password: String,
+    sex: String,
+    age: Number,
+    height: Number,
+    weight: Number,
+    activity_level: Number,
+    tmb: Number    
 });
 
 module.exports = mongoose.model('User', UserSchema);

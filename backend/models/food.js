@@ -6,11 +6,23 @@ var Schema = mongoose.Schema;
 var FoodSchema = Schema({
     name: String,
     image: String,
-    quantity: Number,
-    minimum: Number,
-    unit: String,
-    notes: String,
-    list: { type: Schema.ObjectId, ref:'List' }
+    brand: String,
+    soldin: Array,
+    kgprice: Number,
+    kcal: Number,
+    sodium: Number,
+    fiber: Number,
+    sugar: Number,
+    protein: Number,
+    carbohydrates: Number,
+    fats: Number,
+    sat_fat: Number,
+    mono_fat: Number,
+    poli_fat: Number,
+    omega3: Number,
+    omega6: Number,
+    omega9: Number,
+    //list: { type: Schema.ObjectId, ref:'List' }
 });
 
 module.exports = mongoose.model('Food', FoodSchema);

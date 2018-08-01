@@ -6,36 +6,27 @@ var path = require('path');
 var mongoosePaginate = require('mongoose-pagination');
 
 var controller = {
+
     addFood: function(req,res){
         var food = new Food();
         var params = req.body;
-        item.name = params.name;
-        item.quantity = params.quantity;
-        item.minimum = params.minimum;
-        item.unit = params.unit;
-        item.notes = params.notes;
-        item.list = params.list;
-        
-       
-        /*Comprobamos que existe la lista a la que añadimos el item*/
-        
-        List.findById(params.list, (err, list) => {
-            if(err) return res.status(500).send({message: 'Error al comprobar lista.'});
-            if(!list) return res.status(404).send({message: 'No existe la lista donde estamos guardando el item.'});
-            item.save((err, itemStored) => {
-                if(err) return res.status(500).send({message: 'Error al guardar item.'});
-                if(!itemStored) return res.status(404).send({message: 'No se ha podido guardar el item.'});
-                var update = {$inc : {'elements' : 1}};
-                var itemStored = itemStored; //hacemos global la variable para que esté disponible en el callback a continuacion
-                List.findByIdAndUpdate({_id:itemStored.list}, update, {new:true}, (err, listUpdated) => {
-                    if(err) return res.status(500).send({message: 'Error al actualizar lista.'});
-                    if(!listUpdated) return res.status(404).send({message: 'No existe la lista a actualizar'});
-                    return res.status(200).send({item: itemStored});
-                 });
-                
-            });
-        })        
-    },
+        food.name = params.name;
+        food.soldin = params.soldin;
+        food.brand = params.brand;
+        food.kgprice = params.kgprice;
+        food.kcal = params.kcal;
+        food.sodium = params.sodium;
+        food.protein = params.protein;
+        food.carbohydrates = params.carbohydrates;           
+        food.fat = params.fat; 
+
+        food.save((err, foodStored) => {
+            if(err) return res.status(500).send({message: 'Error al guardar alimento.'});
+            if(!foodStored) return res.status(404).send({message: 'No se ha podido guardar el alimento.'});
+            return res.status(200).send({food: foodStored});    
+        })
+    },        
+
     /*
     getItems: function(req,res){
         Food.find({}).populate({path: 'list',populate : {path : 'user'}}).exec((err, items) => {

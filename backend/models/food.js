@@ -15,7 +15,7 @@ var FoodSchema = Schema({
     sugar: Number,
     protein: Number,
     carbohydrates: Number,
-    fats: Number,
+    fat: Number,
     sat_fat: Number,
     mono_fat: Number,
     poli_fat: Number,

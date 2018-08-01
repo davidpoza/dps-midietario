@@ -56,14 +56,15 @@ var controller = {
         })
 
     },
-    /*
-    getItems: function(req,res){
-        Food.find({}).populate({path: 'list',populate : {path : 'user'}}).exec((err, items) => {
-            if(err) return res.status(500).send({message: 'Error al devolver items.'});
-            if(!items) return res.status(404).send({message: 'No hay items que mostrar.'});
-            return res.status(200).send({items});
+    
+    getFoods: function(req,res){
+        Food.find({}).exec((err, foods) => {
+            if(err) return res.status(500).send({message: 'Error al devolver alimentos.'});
+            if(!foods) return res.status(404).send({message: 'No hay alimentos que mostrar.'});
+            return res.status(200).send({foods});
         })
     },
+    /*
     getListItems: function(req,res){
         var listId = req.params.id;
         Item.find({list: listId}).sort('name').exec((err, items) => {

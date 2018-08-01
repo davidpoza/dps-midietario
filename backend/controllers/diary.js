@@ -15,9 +15,17 @@ var controller = {
         //diary.meals = params.meals;
         var meal1 = new Meal()
         meal1.name = "Comida";
-
+        meal1.save((err, mealStored) => {
+            if(err) return res.status(500).send({message: 'Error al guardar meal.'});
+            if(!mealStored) return res.status(404).send({message: 'No se ha podido guardar el meal.'}); 
+        })
         var meal2 = new Meal()
         meal2.name = "Cena";
+        meal2.save((err, mealStored) => {
+            if(err) return res.status(500).send({message: 'Error al guardar meal.'});
+            if(!mealStored) return res.status(404).send({message: 'No se ha podido guardar el meal.'}); 
+        })
+
         diary.meals = Array(meal1,meal2);
 
         diary.save((err, diaryStored) => {

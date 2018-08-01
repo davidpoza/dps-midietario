@@ -1,5 +1,6 @@
 'use strict'
 var Food = require('../models/food')
+var Meal = require('../models/meal')
 var fs = require('fs');
 var path = require('path');
 
@@ -27,6 +28,34 @@ var controller = {
         })
     },        
 
+
+    addFoodToMeal: function(req,res){
+        var food = new Food();
+        var params = req.body;
+        var mealId = params.meal;
+        var foodId = params.food;
+
+        //obtenemos el meal
+        Meal.findOne({_id: mealId}).exec((err, meal) => {
+            if(err) return res.status(500).send({message: 'Error al obtener meal'});
+            if(!meal) return res.status(404).send({message: 'No existe el meal.'});
+            //console.log(meal);
+            // obtenemos el alimento
+            Food.findOne({_id: foodId}).exec((err, food) => {
+                if(err) return res.status(500).send({message: 'Error al obtener el alimento'});
+                if(!food) return res.status(404).send({message: 'No existe el alimento.'});
+                meal.foods.push(food);
+
+                //actualizamos el meal añadiendo el array foods modificado
+                Meal.findByIdAndUpdate(mealId, meal, {new:true}, (err, mealUpdated) => {
+                    if(err) return res.status(500).send({message: 'Error al actualizar meal.'});
+                    if(!mealUpdated) return res.status(404).send({message: 'No existe el meal a actualizar'});
+                    return res.status(200).send({diary: mealUpdated})
+                });
+            })
+        })
+
+    },
     /*
     getItems: function(req,res){
         Food.find({}).populate({path: 'list',populate : {path : 'user'}}).exec((err, items) => {

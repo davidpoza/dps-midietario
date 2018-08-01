@@ -64,6 +64,17 @@ var controller = {
             return res.status(200).send({foods});
         })
     },
+
+    getFood: function(req,res){
+        var foodId = req.params.id;
+        if(foodId == null) return res.status(404).send({message: 'El alimento no existe.'});
+
+        Food.findById(foodId).exec((err, food) => {
+            if(err) return res.status(500).send({message: 'Error al devolver alimento.'});
+            if(!food) return res.status(404).send({message: 'El alimento no existe.'});
+            return res.status(200).send({food});
+        })
+    },
     /*
     getListItems: function(req,res){
         var listId = req.params.id;

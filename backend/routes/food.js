@@ -14,6 +14,7 @@ router.post('/foods', /*md_auth.ensureAuth,*/ FoodController.addFood);
 router.post('/addfoodtomeal', /*md_auth.ensureAuth,*/ FoodController.addFoodToMeal);
 router.get('/foods', /*md_auth.ensureAuth,*/ FoodController.getFoods);
 router.get('/foods/:id', /*md_auth.ensureAuth,*/ FoodController.getFood);
+router.put('/foods/:id', /*md_auth.ensureAuth,*/ FoodController.updateFood);
 /*router.get('/listitems/:id', md_auth.ensureAuth, ItemController.getListItems);
 router.get('/items/:id', md_auth.ensureAuth, ItemController.getItem);
 router.put('/items/:id', md_auth.ensureAuth, ItemController.updateItem);

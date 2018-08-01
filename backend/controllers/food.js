@@ -75,6 +75,17 @@ var controller = {
             return res.status(200).send({food});
         })
     },
+
+    updateFood: function(req,res){
+        var foodId = req.params.id;
+        var update = req.body;
+        
+        Food.findByIdAndUpdate(foodId, update, {new:true}, (err, foodUpdated) => {
+            if(err) return res.status(500).send({message: 'Error al actualizar alimento.'});
+            if(!foodUpdated) return res.status(404).send({message: 'No existe el alimento a actualizar'});
+            return res.status(200).send({item: foodUpdated})
+        });  
+    },
     /*
     getListItems: function(req,res){
         var listId = req.params.id;

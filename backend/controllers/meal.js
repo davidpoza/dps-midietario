@@ -1,5 +1,6 @@
 'use strict'
-var Meal = require('../models/meal')
+var Meal = require('../models/meal');
+var Diary = require('../models/diary');
 var fs = require('fs');
 var path = require('path');
 
@@ -10,14 +11,27 @@ var controller = {
     addMeal: function(req,res){
         var meal = new Meal();
         var params = req.body;
+        var diaryId = req.params.id;
         meal.name = params.name;
-        meal.foods = params.foods;
+        meal.hour = params.hour;
 
 
         meal.save((err, mealStored) => {
-            if(err) return res.status(500).send({message: 'Error al guardar alimento.'});
-            if(!mealStored) return res.status(404).send({message: 'No se ha podido guardar el alimento.'});
-            return res.status(200).send({food: mealStored});    
+            if(err) return res.status(500).send({message: 'Error al guardar meal.'});
+            if(!mealStored) return res.status(404).send({message: 'No se ha podido guardar el meal.'});
+            
+            Diary.findOne({_id:diaryId}).exec((err, diary) => {
+                if(err) return res.status(500).send({message: 'Error al consultar diario.'});
+                if(!diary) return res.status(404).send({message: 'No hay diario en el que añadir el meal.'});
+                diary.meals.push(mealStored);
+                Diary.findByIdAndUpdate(diaryId, diary, {new:true}, (err, diaryUpdated) => {
+                    if(err) return res.status(500).send({message: 'Error al actualizar diario.'});
+                    if(!diaryUpdated) return res.status(404).send({message: 'No existe el diario a actualizar'});
+                }); 
+               
+                
+            })
+            return res.status(200).send({meal: mealStored});    
         })
     },        
 

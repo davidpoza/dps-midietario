@@ -1,6 +1,7 @@
 'use strict'
 var Meal = require('../models/meal');
 var Diary = require('../models/diary');
+const mongoose = require('mongoose');
 var fs = require('fs');
 var path = require('path');
 
@@ -35,14 +36,36 @@ var controller = {
         })
     },        
 
-    /*
-    getItems: function(req,res){
-        Food.find({}).populate({path: 'list',populate : {path : 'user'}}).exec((err, items) => {
-            if(err) return res.status(500).send({message: 'Error al devolver items.'});
-            if(!items) return res.status(404).send({message: 'No hay items que mostrar.'});
-            return res.status(200).send({items});
-        })
+    deleteMeal: function(req,res){
+        var mealId = req.params.id;
+
+        //buscamos el diario que contiene el meal
+        Diary.findOne({ meals: { $in: mealId }}, (err, diary) => {
+            if(err) return res.status(500).send({message: 'Error al devolver diario.'});
+            if(!diary) return res.status(404).send({message: 'No existe un diario con ese meal'});
+            // eliminamos su referencia en el array meals
+            var index = diary.meals.indexOf(mealId); 
+            if (index !== -1) diary.meals.splice(index, 1);
+           
+            //actualizamos el diario con el nuevo array de referencias.
+            Diary.findByIdAndUpdate(diary._id, diary, {new:true}, (err, diaryUpdated) => {
+                if(err) return res.status(500).send({message: 'Error al actualizar diario.'});
+                if(!diaryUpdated) return res.status(404).send({message: 'No existe el diario a actualizar'});
+                
+                // por ultimo vamos a borrar el meal
+                Meal.findByIdAndRemove(mealId, (err, mealDeleted) => {
+                    if(err) return res.status(500).send({message: 'Error al borrar meal.'});
+                    if(!mealDeleted) return res.status(404).send({message: 'No existe el meal a borrar'});
+                    return res.status(200).send({meal: mealDeleted});
+                });
+                
+            });
+        });
+
+        
     },
+
+    /*
     getListItems: function(req,res){
         var listId = req.params.id;
         Item.find({list: listId}).sort('name').exec((err, items) => {

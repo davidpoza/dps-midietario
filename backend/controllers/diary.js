@@ -3,6 +3,7 @@ var Diary = require('../models/diary')
 var Meal = require('../models/meal')
 var fs = require('fs');
 var path = require('path');
+var config = require('../config');
 
 var mongoosePaginate = require('mongoose-pagination');
 
@@ -11,23 +12,19 @@ var controller = {
     addDiary: function(req,res){
         var diary = new Diary();
         var params = req.body;
-        diary.date = params.date;
-        //diary.meals = params.meals;
-        var meal1 = new Meal()
-        meal1.name = "Comida";
-        meal1.save((err, mealStored) => {
-            if(err) return res.status(500).send({message: 'Error al guardar meal.'});
-            if(!mealStored) return res.status(404).send({message: 'No se ha podido guardar el meal.'}); 
-        })
-        var meal2 = new Meal()
-        meal2.name = "Cena";
-        meal2.save((err, mealStored) => {
-            if(err) return res.status(500).send({message: 'Error al guardar meal.'});
-            if(!mealStored) return res.status(404).send({message: 'No se ha podido guardar el meal.'}); 
-        })
+        var day = params.day;
+        var month = params.month-1;
+        var year = params.year;
+        diary.date = new Date(year,month,day);
 
-        diary.meals = Array(meal1,meal2);
-
+        diary.meals = Array();
+        
+        for(var i=0;i<config.mealsnumber;i++){
+            var meal = new Meal()
+            meal.name = config.meals[i];
+            diary.meals.push(meal);
+        }
+        
         diary.save((err, diaryStored) => {
             if(err) return res.status(500).send({message: 'Error al guardar diario.'});
             if(!diaryStored) return res.status(404).send({message: 'No se ha podido guardar el diario.'});

@@ -1,8 +1,12 @@
 'use strict'
 var Food = require('../models/food')
 var Meal = require('../models/meal')
+var Diary = require('../models/diary')
+
+
 var fs = require('fs');
 var path = require('path');
+var config = require('../config');
 
 var mongoosePaginate = require('mongoose-pagination');
 
@@ -20,7 +24,6 @@ var controller = {
         food.protein = params.protein;
         food.carbohydrates = params.carbohydrates;           
         food.fat = params.fat; 
-
         food.save((err, foodStored) => {
             if(err) return res.status(500).send({message: 'Error al guardar alimento.'});
             if(!foodStored) return res.status(404).send({message: 'No se ha podido guardar el alimento.'});
@@ -29,32 +32,51 @@ var controller = {
     },        
 
 
-    addFoodToMeal: function(req,res){
+    addFoodToDiary: function(req,res){
         var food = new Food();
         var params = req.body;
-        var mealId = params.meal;
+        var year = params.year;
+        var month = params.month-1;
+        var day = params.day;
         var foodId = params.food;
+        var mealIndex = params.meal; // el indice del array de meals donde vamos a insertar
 
-        //obtenemos el meal
-        Meal.findOne({_id: mealId}).exec((err, meal) => {
-            if(err) return res.status(500).send({message: 'Error al obtener meal'});
-            if(!meal) return res.status(404).send({message: 'No existe el meal.'});
-            //console.log(meal);
-            // obtenemos el alimento
+        //obtenemos el diario a partir de la fecha
+        var diaryDate = new Date(year,month,day);
+
+        Diary.findOne({date: diaryDate}).exec((err, diary) => {
+            if(err) return res.status(500).send({message: 'Error al devolver diario.'});
+            if(!diary) {
+                //no existe el diario asi que lo creamos
+                var diary = new Diary();
+                diary.date = new Date(year,month,day);
+                diary.meals = Array();
+        
+                for(var i=0;i<config.mealsnumber;i++){
+                    var meal = new Meal()
+                    meal.name = config.meals[i];
+                    diary.meals.push(meal);
+                }
+                
+                diary.save((err, diaryStored) => {
+                    if(err) return res.status(500).send({message: 'Error al guardar diario.'});
+                    if(!diaryStored) return res.status(404).send({message: 'No se ha podido guardar el diario.'});  
+                })
+            }
+            // buscamos el alimento para insertar su referencia en el meal correspondiente
             Food.findOne({_id: foodId}).exec((err, food) => {
                 if(err) return res.status(500).send({message: 'Error al obtener el alimento'});
                 if(!food) return res.status(404).send({message: 'No existe el alimento.'});
-                meal.foods.push(food);
+                diary.meals[mealIndex].foods.push(food._id);
 
-                //actualizamos el meal añadiendo el array foods modificado
-                Meal.findByIdAndUpdate(mealId, meal, {new:true}, (err, mealUpdated) => {
-                    if(err) return res.status(500).send({message: 'Error al actualizar meal.'});
-                    if(!mealUpdated) return res.status(404).send({message: 'No existe el meal a actualizar'});
-                    return res.status(200).send({diary: mealUpdated})
+                //actualizamos el diario con el nuevo array de meals
+                Diary.findByIdAndUpdate(diary._id, diary, {new:true}, (err, diaryUpdated) => {
+                    if(err) return res.status(500).send({message: 'Error al actualizar diario.'});
+                    if(!diaryUpdated) return res.status(404).send({message: 'No existe el diario a actualizar'});
+                    return res.status(200).send({diary: diaryUpdated})
                 });
             })
         })
-
     },
     
     getFoods: function(req,res){

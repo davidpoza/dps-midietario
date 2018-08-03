@@ -138,6 +138,16 @@ var controller = {
             return res.status(200).send({item: foodUpdated})
         });  
     },
+
+    deleteFood: function(req,res){
+        var foodId = req.params.id;
+        Food.findByIdAndRemove(foodId, (err, foodDeleted) => {
+            if(err) return res.status(500).send({message: 'Error al borrar alimento.'});
+            if(!foodDeleted) return res.status(404).send({message: 'No existe el alimento a borrar'});            
+            return res.status(200).send({food: foodDeleted});
+        });
+    },
+
     /*
     getListItems: function(req,res){
         var listId = req.params.id;
@@ -209,7 +219,7 @@ var controller = {
         })
     },
 
-    *******
+    
     deleteItem: function(req,res){
         var itemId = req.params.id;
         Item.findByIdAndRemove(itemId, (err, itemDeleted) => {

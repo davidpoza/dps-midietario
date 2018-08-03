@@ -3,7 +3,6 @@ var Food = require('../models/food')
 var Meal = require('../models/meal')
 var Diary = require('../models/diary')
 
-
 var fs = require('fs');
 var path = require('path');
 var config = require('../config');
@@ -77,6 +76,39 @@ var controller = {
         })
     },
     
+
+    deleteFoodFromDiary: function(req,res){
+        var params = req.body;       
+        var foodId = params.food;
+        var diaryId = params.diary;
+        var mealIndex = params.meal; // el indice del array de meals donde vamos a borrar
+
+        if(!foodId) return res.status(404).send({message: 'No ha indicado alimento a borrar'});
+        if(!diaryId) return res.status(404).send({message: 'No ha indicado diario'});
+        if(!mealIndex) return res.status(404).send({message: 'No ha indicado meal'});
+
+        Diary.findOne({_id:diaryId}).exec((err, diary) => {
+            if(err) return res.status(500).send({message: 'Error al seleccionar diario.'});
+            if(!diary) return res.status(404).send({message: 'No existe el diario.'});
+            
+            // borramos el id del alimento correcto
+
+            for (let i = 0; i < diary.meals[mealIndex].foods.length; i++) {
+                if(diary.meals[mealIndex].foods[i] == foodId)
+                diary.meals[mealIndex].foods.splice(i, 1);               
+            }
+  
+            // actualizamos el diario
+            Diary.findByIdAndUpdate(diaryId, diary, {new:true}, (err, diaryUpdated) => {
+                if(err) return res.status(500).send({message: 'Error al actualizar diario.'});
+                if(!diaryUpdated) return res.status(404).send({message: 'No existe el diario a actualizar'});
+                return res.status(200).send({diary: diaryUpdated})
+            });  
+        });
+
+        
+    },
+
     getFoods: function(req,res){
         Food.find({}).exec((err, foods) => {
             if(err) return res.status(500).send({message: 'Error al devolver alimentos.'});
@@ -177,6 +209,7 @@ var controller = {
         })
     },
 
+    *******
     deleteItem: function(req,res){
         var itemId = req.params.id;
         Item.findByIdAndRemove(itemId, (err, itemDeleted) => {

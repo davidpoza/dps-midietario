@@ -35,21 +35,19 @@ var controller = {
     addFoodToDiary: function(req,res){
         var food = new Food();
         var params = req.body;
-        var year = params.year;
-        var month = params.month-1;
-        var day = params.day;
+       
         var foodId = params.food;
         var mealIndex = params.meal; // el indice del array de meals donde vamos a insertar
 
         //obtenemos el diario a partir de la fecha
-        var diaryDate = new Date(year,month,day);
+        var diaryDate = new Date(params.date);
 
         Diary.findOne({date: diaryDate}).exec((err, diary) => {
             if(err) return res.status(500).send({message: 'Error al devolver diario.'});
             if(!diary) {
                 //no existe el diario asi que lo creamos
                 var diary = new Diary();
-                diary.date = new Date(year,month,day);
+                diary.date = diaryDate;
                 diary.meals = Array();
         
                 for(var i=0;i<config.mealsnumber;i++){

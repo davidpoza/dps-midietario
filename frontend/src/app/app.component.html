@@ -1,0 +1,30 @@
+<mat-sidenav-container>
+  
+    <mat-sidenav #sidenav>
+        <mat-nav-list>
+          <a *ngIf="!identity" mat-list-item [routerLink]="['/login']" (click)="sidenav.toggle()">Login</a>
+          <a *ngIf="identity" mat-list-item>Hola {{identity.name}}!</a>
+          <a *ngIf="identity" [routerLink]="['/']" [routerLinkActive]="['actived']" mat-list-item (click)="sidenav.toggle()"><mat-icon mat-list-icon>list_alt</mat-icon>Ver despensa</a>         
+          <a *ngIf="identity" [routerLink]="['/shoppingcart']" mat-list-item (click)="sidenav.toggle()"><mat-icon mat-list-icon>shopping_cart</mat-icon>Lista de la compra</a>
+          <a *ngIf="identity" mat-list-item (click)="logout()" (click)="sidenav.toggle()"><mat-icon mat-list-icon>exit_to_app</mat-icon>Cerrar sesión</a>
+        </mat-nav-list>
+    </mat-sidenav>
+  
+    <mat-toolbar id="header-toolbar" color="primary">
+        <mat-toolbar-row>    
+            <mat-icon mat-list-icon *ngIf="showMenu && identity" (click)="sidenav.open()" style="margin-right: 10px;">menu</mat-icon>
+            <mat-icon mat-list-icon *ngIf="!showMenu && identity" (click)="goBack()" style="margin-right: 10px;">arrow_back_ios</mat-icon>
+            {{title}}
+            <span class="example-spacer"></span>
+            <h1 id="logo">dpsMiDietario</h1>
+        </mat-toolbar-row>
+    </mat-toolbar>
+  
+    <div class="content">
+        <router-outlet *ngIf="identity && _router.url!='/register'"></router-outlet>
+        <login *ngIf="!identity && _router.url!='/register'"></login>
+        <register *ngIf="_router.url=='/register'"></register>
+    </div>
+    
+</mat-sidenav-container>
+

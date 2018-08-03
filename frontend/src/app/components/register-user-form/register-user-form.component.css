@@ -1,0 +1,13 @@
+.register{
+    
+    padding: 10px;
+    margin-top: 20%;
+}
+
+.register > *{
+    width: 100%;
+}
+
+.register h1{
+    margin-bottom: 30px;
+}

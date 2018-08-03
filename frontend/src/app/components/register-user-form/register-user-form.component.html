@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col col-lg-6 ">
+              
+      <form #registerUserForm="ngForm" class="register">
+        <h1>Registro nuevo usuario</h1>
+        <mat-form-field>
+          <input name="name" matInput placeholder="Nombre" [(ngModel)]="user.name" required>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input name="nick" matInput placeholder="Nick" [(ngModel)]="user.nick" required>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input type="email" pattern=".+@.+" name="email" matInput placeholder="Email" [(ngModel)]="user.email" required>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input type="password" name="password" matInput placeholder="Password" [(ngModel)]="user.password" required>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" (click) = "onClick(registerUserForm)" [disabled]="!registerUserForm.form.valid" >Registrar</button>
+      </form>
+</div>
+</div>

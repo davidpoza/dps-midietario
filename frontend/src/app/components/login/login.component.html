@@ -1,0 +1,16 @@
+<div class="container">
+    <div class="row justify-content-center">
+      <div class="col col-lg-4 ">        
+        <form #loginForm="ngForm" class="login" (keyup.enter)="onClick()">
+          <mat-form-field>
+            <input name="email" matInput placeholder="Email" [(ngModel)]="user.email" required>
+          </mat-form-field>
+
+          <mat-form-field>
+             <input name="password" type="password" matInput placeholder="Password" [(ngModel)]="user.password" required>
+          </mat-form-field>
+          <button mat-raised-button color="primary" (click) = "onClick()" [disabled]="!loginForm.form.valid" >Entrar</button>
+          <p style="margin-top: 20px"><a [routerLink]="['/register']">Registrar nuevo usuario</a></p> 
+        </form>
+</div>
+</div>

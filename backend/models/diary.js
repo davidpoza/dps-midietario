@@ -6,7 +6,7 @@ var Schema = mongoose.Schema;
 
 var DiarySchema = Schema({
     date: Date,
-    meals: [{ type: Schema.ObjectId, ref:'Meal' }]
+    meals: []
 });
 
 module.exports = mongoose.model('Diary', DiarySchema);

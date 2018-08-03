@@ -12,13 +12,12 @@ var controller = {
     addDiary: function(req,res){
         var diary = new Diary();
         var params = req.body;
-        var day = params.day;
-        var month = params.month-1;
-        var year = params.year;
-        diary.date = new Date(year,month,day);
+        var date = params.date;
+
+        diary.date = new Date(date);
 
         diary.meals = Array();
-        
+
         for(var i=0;i<config.mealsnumber;i++){
             var meal = new Meal()
             meal.name = config.meals[i];
@@ -32,6 +31,18 @@ var controller = {
         })
     },        
 
+    getDiary: function(req,res){
+        var dateString = req.params.date;
+        var date = new Date(dateString);
+        console.log(date);
+        if(dateString == null) return res.status(404).send({message: 'El diario no existe.'});
+
+        Diary.findOne({date: date}).exec((err, diary) => {
+            if(err) return res.status(500).send({message: 'Error al devolver diario.'});
+            if(!diary) return res.status(404).send({message: 'El diario no existe.'});
+            return res.status(200).send({diary});
+        })
+    },
     /*
     getItems: function(req,res){
         Food.find({}).populate({path: 'list',populate : {path : 'user'}}).exec((err, items) => {

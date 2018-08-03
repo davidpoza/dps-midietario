@@ -1,0 +1,9 @@
+<p>
+  <button mat-button (click)="prevDay()"><</button>
+  <mat-form-field>
+    <input matInput [matDatepicker]="picker" [(ngModel)] = "date" >
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker touchUi #picker></mat-datepicker>
+  </mat-form-field>
+  <button mat-button (click)="nextDay()">></button>
+</p>

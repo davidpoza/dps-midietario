@@ -47,7 +47,7 @@ export class DiaryComponent implements OnInit {
   ngOnInit() {
     this._appService.setTitle("Diario de comidas");
     this.getDiary()
-    console.log(this.diary);
+
   }
 
   nextDay(){
@@ -55,7 +55,6 @@ export class DiaryComponent implements OnInit {
     this.date.setDate(this.date.getDate() + 1);
     this.date = new Date(this.date);
     this.getDiary()
-    console.log(this.diary);
     
   }
 
@@ -65,7 +64,7 @@ export class DiaryComponent implements OnInit {
     this.date.setDate(this.date.getDate() - 1);
     this.date = new Date(this.date);
     this.getDiary()
-    console.log(this.diary);    
+  
   }
 
   getDiary(){
@@ -73,7 +72,8 @@ export class DiaryComponent implements OnInit {
     this._diaryService.getDiary(this.token, dateString).subscribe(
       response =>{
         this.diary = response.diary;
-        
+        console.log(this.diary);
+    
       },
       error => {
         console.log();

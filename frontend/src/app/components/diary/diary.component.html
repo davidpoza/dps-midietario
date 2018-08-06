@@ -7,3 +7,6 @@
   </mat-form-field>
   <button mat-button (click)="nextDay()">></button>
 </p>
+<div *ngFor="let meal of diary.meals;">
+  <meal [name]="meal.name" [foods]="meal.foods"></meal>
+</div>

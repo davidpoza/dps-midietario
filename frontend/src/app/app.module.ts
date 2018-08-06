@@ -22,6 +22,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import {MatSelectModule} from '@angular/material/select';
 import { RegisterUserFormComponent } from './components/register-user-form/register-user-form.component';
 import { DiaryComponent } from './components/diary/diary.component';
+import { MealComponent } from './components/meal/meal.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { DiaryComponent } from './components/diary/diary.component';
     LoginComponent,
     RegisterUserFormComponent,
     DiaryComponent,
+    MealComponent,
   ],
   imports: [
     BrowserModule,

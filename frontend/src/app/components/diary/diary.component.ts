@@ -76,7 +76,7 @@ export class DiaryComponent implements OnInit {
     var dateString = moment(this.date.toDateString()).format("YYYY-MM-DD")
     this._diaryService.getDiary(this.token, dateString).subscribe(
       response =>{
-        this.diary = response.diary;
+        this.diary = this._diaryService.calculateDiary(response.diary);
         console.log(this.diary);
     
       },

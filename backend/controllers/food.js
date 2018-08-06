@@ -34,9 +34,11 @@ var controller = {
     addFoodToDiary: function(req,res){
         var food = new Food();
         var params = req.body;
-       
+        var quantity = params.quantity;
         var foodId = params.food;
         var mealIndex = params.meal; // el indice del array de meals donde vamos a insertar
+
+        if(!quantity) return res.status(500).send({message: 'Error, debe indicar la cantidad de alimento.'});
 
         //obtenemos el diario a partir de la fecha
         var diaryDate = new Date(params.date);
@@ -64,7 +66,8 @@ var controller = {
             Food.findOne({_id: foodId}).exec((err, food) => {
                 if(err) return res.status(500).send({message: 'Error al obtener el alimento'});
                 if(!food) return res.status(404).send({message: 'No existe el alimento.'});
-                diary.meals[mealIndex].foods.push(food._id);
+                var foodentry = {quantity: quantity, refFood: food._id}
+                diary.meals[mealIndex].foods.push(foodentry);
 
                 //actualizamos el diario con el nuevo array de meals
                 Diary.findByIdAndUpdate(diary._id, diary, {new:true}, (err, diaryUpdated) => {

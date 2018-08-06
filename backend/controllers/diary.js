@@ -37,7 +37,7 @@ var controller = {
         console.log(date);
         if(dateString == null) return res.status(404).send({message: 'El diario no existe.'});
 
-        Diary.findOne({date: date}).exec((err, diary) => {
+        Diary.findOne({date: date}).populate('meals.foods').exec((err, diary) => {
             if(err) return res.status(500).send({message: 'Error al devolver diario.'});
             if(!diary) return res.status(404).send({message: 'El diario no existe.'});
             return res.status(200).send({diary});

@@ -10,4 +10,7 @@ var MealSchema = Schema({
     foods: [{ type: Schema.ObjectId, ref:'Food' }]
 });
 
-module.exports = mongoose.model('Meal', MealSchema);
+module.exports = {
+    Meal: mongoose.model('Meal', MealSchema),
+    MealSchema: MealSchema
+}

@@ -1,10 +1,17 @@
 
 
-  <br />-----<br />
-  {{name}}
-  <div  *ngFor="let food of foods; let i = index">
-    {{food.name}}
-
-
+<div class="meal">
+  <h2>{{name}}</h2>
+  
+  
+  <div class="food" *ngFor="let food of foods; let i = index">
+    <h5>{{food.refFood.name}}</h5>
+    <p>{{food.quantity}}g. - ({{food.refFood.brand}})</p>
+    <div class="macros">
+        <span><strong>P</strong>: {{food.refFood.protein}}</span>
+        <span><strong>C</strong>: {{food.refFood.carbohydrates}}</span>
+        <span><strong>G</strong>: {{food.refFood.fat}}</span>
+        <span><strong>Cal</strong>: {{food.refFood.kcal}}</span>
   </div>
-
+  </div>
+</div>

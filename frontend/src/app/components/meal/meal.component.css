@@ -1,0 +1,22 @@
+.meal{
+    color: #ccc;
+    padding: 10px;
+    background-color: rgb(58, 58, 58);
+    margin-bottom: 20px;
+}
+
+.meal h2{
+    color: #5ddfc9;
+}
+
+.food{
+    padding: 10px;
+}
+
+.food h5{
+    color: white;
+}
+
+.macros span{
+    padding-right: 30px;
+}

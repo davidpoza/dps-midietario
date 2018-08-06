@@ -67,6 +67,11 @@ export class DiaryComponent implements OnInit {
   
   }
 
+  onChangeDate(){
+    this.date = new Date(this.date);
+    this.getDiary()
+  }
+
   getDiary(){
     var dateString = moment(this.date.toDateString()).format("YYYY-MM-DD")
     this._diaryService.getDiary(this.token, dateString).subscribe(
@@ -76,6 +81,7 @@ export class DiaryComponent implements OnInit {
     
       },
       error => {
+        this.diary = '';
         console.log();
       }
     );

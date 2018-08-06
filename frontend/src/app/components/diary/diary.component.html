@@ -1,7 +1,7 @@
 <p>
   <button mat-button (click)="prevDay()"><</button>
   <mat-form-field>
-    <input matInput [matDatepicker]="picker" [(ngModel)] = "date" >
+    <input matInput [matDatepicker]="picker" [(ngModel)] = "date" (dateChange)="onChangeDate()" >
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker touchUi #picker></mat-datepicker>
   </mat-form-field>
@@ -9,4 +9,8 @@
 </p>
 <div *ngFor="let meal of diary.meals;">
   <meal [name]="meal.name" [foods]="meal.foods"></meal>
+</div>
+
+<div *ngIf="!diary">
+    No hay entradas
 </div>

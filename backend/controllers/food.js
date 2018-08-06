@@ -50,7 +50,7 @@ var controller = {
                 diary.meals = Array();
         
                 for(var i=0;i<config.mealsnumber;i++){
-                    var meal = new Meal()
+                    var meal = new Meal.Meal()
                     meal.name = config.meals[i];
                     diary.meals.push(meal);
                 }

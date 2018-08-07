@@ -9,6 +9,7 @@ export class MealComponent implements OnInit {
 
   @Input() name: string;
   @Input() foods: any[];
+  @Input() totals: any[];
   constructor() { }
 
   ngOnInit() {

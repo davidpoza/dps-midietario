@@ -10,7 +10,7 @@
 
 <div *ngIf="diary">
   <div *ngFor="let meal of diary.meals;">
-    <meal [name]="meal.name" [foods]="meal.foods"></meal>
+    <meal [name]="meal.name" [foods]="meal.foods" [totals]="meal.totals"></meal>
   </div>
 </div>
 <div *ngIf="!diary">

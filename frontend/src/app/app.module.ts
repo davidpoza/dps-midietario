@@ -23,6 +23,7 @@ import { RegisterUserFormComponent } from './components/register-user-form/regis
 import { DiaryComponent } from './components/diary/diary.component';
 import { MealComponent } from './components/meal/meal.component';
 import { FoodsComponent } from './components/foods/foods.component';
+import { AddFoodFormComponent } from './components/add-food-form/add-food-form.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { FoodsComponent } from './components/foods/foods.component';
     DiaryComponent,
     MealComponent,
     FoodsComponent,
+    AddFoodFormComponent,
   ],
   imports: [
     BrowserModule,

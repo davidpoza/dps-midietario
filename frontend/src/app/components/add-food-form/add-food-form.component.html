@@ -1,0 +1,46 @@
+<div class="container">
+    <div class="row justify-content-center">
+      <div class="col col-lg-6 ">
+                
+        <form #addFoodForm="ngForm" class="addfood">
+          <h1>Crear nuevo alimento</h1>
+          <mat-form-field>
+            <input name="name" matInput placeholder="Nombre del alimento" [(ngModel)]="food.name" required>
+          </mat-form-field>
+
+          <mat-form-field>
+              <input name="brand" matInput placeholder="Marca" [(ngModel)]="food.brand">
+          </mat-form-field>
+
+          <mat-form-field>
+            <input name="protein" matInput type="number" placeholder="proteina" [(ngModel)]="food.protein" required>
+          </mat-form-field>
+
+          <mat-form-field>
+              <input name="carbohydrates" matInput type="number" placeholder="carbohidratos" [(ngModel)]="food.carbohydrates" required>
+          </mat-form-field>
+
+          <mat-form-field>
+              <input name="fat" matInput type="number" placeholder="grasas" [(ngModel)]="food.fat" required>
+          </mat-form-field>
+
+          <mat-form-field>
+              <input name="fiber" matInput type="number" placeholder="fibra" [(ngModel)]="food.fiber" required>
+          </mat-form-field>
+
+          <mat-form-field>
+              <input name="kcal" matInput type="number" placeholder="kcal" [(ngModel)]="food.kcal" required>
+          </mat-form-field>
+
+          <p>
+            Imagen<br />
+            <input type="file" name="image" placeholder="imagen" (change)="fileChangeEvent($event)">
+
+          </p>
+            
+          
+  
+          <button mat-raised-button color="primary" (click) = "onClick(addFoodForm)" [disabled]="!addFoodForm.form.valid" >Crear</button> 
+        </form>
+  </div>
+  </div>

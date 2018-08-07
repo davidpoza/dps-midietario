@@ -9,8 +9,8 @@
               <div class="col">P:{{food.protein}}</div>
               <div class="col">C:{{food.carbohydrates}}</div>
               <div class="col">G:{{food.fat}}</div>
+              <div class="col">Fibra:{{food.fiber}}</div>
               <div class="col">Cal:{{food.kcal}}</div>
-
           </div>
       </div>
       
@@ -21,3 +21,6 @@
   </mat-list-item>
 </div>
 </mat-list>
+<button mat-fab color="primary" class="floating-button" [routerLink]="['/addfood']">
+  <mat-icon>add</mat-icon>
+</button>

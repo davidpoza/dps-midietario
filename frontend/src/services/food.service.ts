@@ -24,6 +24,11 @@ export class FoodService{
         return this._http.get(this.url+'foods/', {headers:headers});
     }
 
-    
+    addFood(item, token):Observable<any>{
+        let headers = new HttpHeaders().set('Content-Type', 'application/json')
+            .set('Authorization', token);
+        let params = JSON.stringify(item);
+        return this._http.post(this.url+'foods', params,  {headers:headers});
+    }
     
 }

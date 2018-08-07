@@ -1,4 +1,4 @@
-<p>
+<p style="text-align: center">
   <button mat-button (click)="prevDay()"><</button>
   <mat-form-field>
     <input matInput [matDatepicker]="picker" [(ngModel)] = "date" (dateChange)="onChangeDate()" >
@@ -14,5 +14,5 @@
   </div>
 </div>
 <div *ngIf="!diary">
-    No hay entradas
+    No hay entradas en esta fecha
 </div>

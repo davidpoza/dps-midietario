@@ -7,16 +7,42 @@
 
 .meal h2{
     color: #5ddfc9;
+    font-size: 25px;
+    background-color: rgb(22, 22, 22);
+    margin: -10px;
+    margin-bottom: 10px;
+    text-align: center;
 }
 
 .food{
-    padding: 10px;
+    padding: 20px;
+    margin: -10px;
+    border-bottom: 1px solid rgb(78, 78, 78);    
 }
 
 .food h5{
     color: white;
+    font-size: 18px;
 }
 
 .macros span{
     padding-right: 30px;
+}
+
+.totals{
+    padding-left: 20px;
+    padding-right: 20px;
+    margin: -10px;
+    margin-top: 10px;
+    background-color: rgb(22, 22, 22);
+}
+
+.totals span{
+    padding-right: 30px;
+    
+}
+
+.quantity{
+    color: #5ddfc9;
+    float: right;
 }

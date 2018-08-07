@@ -1,12 +1,14 @@
 
 
 <div class="meal">
-  <h2>{{name}}</h2>
+  <h2>{{name | uppercase}}</h2>
   
-  
+  <div *ngIf="foods==''">
+    No hay entradas
+  </div>
   <div class="food" *ngFor="let food of foods; let i = index">
-    <h5>{{food.refFood.name}}</h5>
-    <p>{{food.quantity}}g. - ({{food.refFood.brand}})</p>
+    <h5>{{food.refFood.name | uppercase}}<span class="quantity">{{food.quantity}}g.</span></h5>
+    <p *ngIf="food.refFood.brand!=''">{{food.refFood.brand}}</p>
     <div class="macros">
         <span><strong>P</strong>: {{food.refFood.protein}}</span>
         <span><strong>C</strong>: {{food.refFood.carbohydrates}}</span>

@@ -1,3 +1,23 @@
-<p>
-  foods works!
-</p>
+<mat-list>
+  <div *ngFor="let food of foods; let i = index" class="item">
+  <mat-list-item   >
+      <mat-icon mat-list-icon>folder</mat-icon>
+      <h4 mat-line>{{food.name}}<span *ngIf="food.brand"> - {{food.brand}}</span></h4>
+      <div mat-line class="container">
+          <div class="row">
+
+              <div class="col">P:{{food.protein}}</div>
+              <div class="col">C:{{food.carbohydrates}}</div>
+              <div class="col">G:{{food.fat}}</div>
+              <div class="col">Cal:{{food.kcal}}</div>
+
+          </div>
+      </div>
+      
+      <button mat-icon-button color="primary" (click)="deleteList(list._id,i)">
+          <mat-icon>delete</mat-icon>
+      </button>&nbsp;
+      
+  </mat-list-item>
+</div>
+</mat-list>

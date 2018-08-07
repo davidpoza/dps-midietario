@@ -116,6 +116,7 @@ var controller = {
         Food.find({}).exec((err, foods) => {
             if(err) return res.status(500).send({message: 'Error al devolver alimentos.'});
             if(!foods) return res.status(404).send({message: 'No hay alimentos que mostrar.'});
+            console.log("comidas");
             return res.status(200).send({foods});
         })
     },

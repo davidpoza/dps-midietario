@@ -22,7 +22,8 @@ var controller = {
         food.sodium = params.sodium;
         food.protein = params.protein;
         food.carbohydrates = params.carbohydrates;           
-        food.fat = params.fat; 
+        food.fat = params.fat;
+        food.fiber = params.fiber; 
         food.save((err, foodStored) => {
             if(err) return res.status(500).send({message: 'Error al guardar alimento.'});
             if(!foodStored) return res.status(404).send({message: 'No se ha podido guardar el alimento.'});

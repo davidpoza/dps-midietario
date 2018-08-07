@@ -31,4 +31,9 @@ export class FoodService{
         return this._http.post(this.url+'foods', params,  {headers:headers});
     }
     
+    deleteFood(foodId,token):Observable<any>{
+        let headers = new HttpHeaders().set('Content-Type', 'application/json')
+        .set('Authorization', token);
+        return this._http.delete(this.url+'foods/'+foodId, {headers:headers});
+    }
 }

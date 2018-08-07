@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>Borrar lista</h1>
+    <mat-dialog-content>
+      {{data.message}}
+    </mat-dialog-content>
+    <mat-dialog-actions>
+      <button mat-button (click)="dialogRef.close(false)">Cancelar</button>
+      <button mat-button (click)="dialogRef.close(true)">Si</button>
+    </mat-dialog-actions>

@@ -24,6 +24,7 @@ import { DiaryComponent } from './components/diary/diary.component';
 import { MealComponent } from './components/meal/meal.component';
 import { FoodsComponent } from './components/foods/foods.component';
 import { AddFoodFormComponent } from './components/add-food-form/add-food-form.component';
+import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { AddFoodFormComponent } from './components/add-food-form/add-food-form.c
     MealComponent,
     FoodsComponent,
     AddFoodFormComponent,
+    ConfirmationDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,6 +56,7 @@ import { AddFoodFormComponent } from './components/add-food-form/add-food-form.c
     MatNativeDateModule
   ],
   entryComponents: [
+    ConfirmationDialogComponent,
   ],
 
   providers: [

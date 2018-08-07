@@ -8,8 +8,10 @@ import { Component, OnInit, Input } from '@angular/core';
 export class MealComponent implements OnInit {
 
   @Input() name: string;
+  @Input() index: number;
   @Input() foods: any[];
   @Input() totals: any[];
+  @Input() diary: string;
   constructor() { }
 
   ngOnInit() {

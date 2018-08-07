@@ -1,6 +1,6 @@
 <mat-list>
   <div *ngFor="let food of foods; let i = index" class="item">
-  <mat-list-item   >
+  <mat-list-item  [routerLink]="['/food',food._id, date, meal]" >
       <mat-icon mat-list-icon>folder</mat-icon>
       <h4 mat-line>{{food.name}}<span *ngIf="food.brand"> - {{food.brand}}</span></h4>
       <div mat-line class="container">

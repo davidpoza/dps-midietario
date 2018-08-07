@@ -25,6 +25,7 @@ import { MealComponent } from './components/meal/meal.component';
 import { FoodsComponent } from './components/foods/foods.component';
 import { AddFoodFormComponent } from './components/add-food-form/add-food-form.component';
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
+import { FoodInfoComponent } from './components/food-info/food-info.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { ConfirmationDialogComponent } from './components/confirmation-dialog/co
     FoodsComponent,
     AddFoodFormComponent,
     ConfirmationDialogComponent,
+    FoodInfoComponent,
   ],
   imports: [
     BrowserModule,

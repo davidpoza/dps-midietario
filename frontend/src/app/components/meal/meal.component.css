@@ -46,3 +46,9 @@
     color: #5ddfc9;
     float: right;
 }
+
+.addFood{
+    padding: 20px;
+    margin: -10px;
+    border-bottom: 1px solid rgb(78, 78, 78);    
+}

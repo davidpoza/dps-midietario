@@ -33,6 +33,7 @@ export class DiaryComponent implements OnInit {
   public token;
   public identity;
   public diary;
+  public dateString;
 
   constructor(
     private _diaryService: DiaryService,
@@ -73,8 +74,8 @@ export class DiaryComponent implements OnInit {
   }
 
   getDiary(){
-    var dateString = moment(this.date.toDateString()).format("YYYY-MM-DD")
-    this._diaryService.getDiary(this.token, dateString).subscribe(
+    this.dateString = moment(this.date.toDateString()).format("YYYY-MM-DD")
+    this._diaryService.getDiary(this.token, this.dateString).subscribe(
       response =>{
         this.diary = this._diaryService.calculateDiary(response.diary);
         console.log(this.diary);

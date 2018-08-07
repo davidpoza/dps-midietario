@@ -24,6 +24,14 @@ export class FoodService{
         return this._http.get(this.url+'foods/', {headers:headers});
     }
 
+    getFood(foodId,token):Observable<any>{
+        let headers = new HttpHeaders().set('Content-Type', 'application/json')
+            .set('Authorization', token);
+
+        return this._http.get(this.url+'foods/'+foodId, {headers:headers});
+    }
+
+
     addFood(item, token):Observable<any>{
         let headers = new HttpHeaders().set('Content-Type', 'application/json')
             .set('Authorization', token);
@@ -36,4 +44,17 @@ export class FoodService{
         .set('Authorization', token);
         return this._http.delete(this.url+'foods/'+foodId, {headers:headers});
     }
+
+    addFoodToDiary(food, diary, mealIndex, quantity, token):Observable<any>{
+        let headers = new HttpHeaders().set('Content-Type', 'application/json')
+        .set('Authorization', token);
+        let params = {
+            food: food,
+            date: diary,
+            meal: mealIndex,
+            quantity:quantity,
+        };
+        return this._http.post(this.url+'addfoodtodiary', params, {headers:headers});
+    }
+    
 }

@@ -6,6 +6,7 @@ import { FoodService } from '../../../services/food.service';
 import { MatSnackBar } from '@angular/material';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-foods',
@@ -17,6 +18,8 @@ export class FoodsComponent implements OnInit {
   public foods: Array<Food>;
   public token;
   public identity;
+  public date;
+  public meal;
 
   constructor(
     private _foodService: FoodService,
@@ -24,10 +27,16 @@ export class FoodsComponent implements OnInit {
     private _appService: AppService,
     public dialog: MatDialog,
     public snackBar: MatSnackBar,
+    private _route: ActivatedRoute,
   ) {
     this.token = this._userService.getToken();
     this.identity = this._userService.getIdentity();
     
+    //pasamos los parametros de la url al siguiente componente de food-info
+    this._route.params.subscribe(params => {
+      this.date = params.date;
+      this.meal = params.meal;
+    })
    }
 
   ngOnInit() {
@@ -70,6 +79,12 @@ export class FoodsComponent implements OnInit {
       }
 
     });    
-    
   }
+
+  onClick(){
+    // si le estamos pasando diary y meal como parametros en la url entonces insertamos alimento
+
+    // en caso contrario, mostramos 
+  }
+
 }

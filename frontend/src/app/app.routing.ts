@@ -14,6 +14,7 @@ const appRoutes: Routes = [
     { path: 'foods', component: FoodsComponent},
     { path: 'addfood', component: AddFoodFormComponent},
     { path: 'food/:id/:date/:meal', component: FoodInfoComponent},
+    { path: 'food/:id', component: FoodInfoComponent},
     { path: 'foods/:date/:meal', component: FoodsComponent},
     { path: 'login', component: LoginComponent},
     { path: 'register', component: RegisterUserFormComponent},

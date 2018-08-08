@@ -11,6 +11,10 @@
     float: right
 }
 
+.nutrient-container{
+    margin-bottom: 20px;
+}
+
 .nutrient{
     color: white;
     border-radius: 5px;
@@ -21,4 +25,8 @@
 
 .nutrient .value{
     color: #5ddfc9;
+}
+
+button {
+    width: 100%;
 }

@@ -18,6 +18,7 @@ export class FoodInfoComponent implements OnInit {
   public token;
   public identity;
   public foodId;
+  public date;
 
   constructor(
     private _foodService: FoodService,
@@ -32,6 +33,7 @@ export class FoodInfoComponent implements OnInit {
     this.quantity = 100;
     this._route.params.subscribe(params => {
       this.foodId = params.id;
+      this.date = params.date;
       this.getFood(this.foodId);
     })
 

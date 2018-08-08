@@ -12,7 +12,7 @@
           </div>
 
           <h2>Información nutricional</h2>
-          <div class="container">
+          <div class="nutrient-container container">
             <div class="row justify-content-center">
                 <div class="nutrient col">
                     Proteínas<br /><span class="value">{{calculatedFood.protein | number : '1.2-2'}}g.</span>
@@ -34,6 +34,8 @@
                 </div>
             </div>
           </div>
+
+          <button *ngIf="date" mat-raised-button color="primary" >Añadir</button>
         </form>
   </div>
   </div>

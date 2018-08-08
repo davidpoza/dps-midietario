@@ -83,10 +83,13 @@ export class FoodsComponent implements OnInit {
   }
 
   onClick(food, date, meal){
-    // si le estamos pasando diary y meal como parametros en la url entonces insertamos alimento
+    /* si le estamos pasando diary y meal como parametros en la url entonces mostramos
+    la vista para insertar alimento */
     if(food && date && meal)
       this.router.navigate(['/food', food, date, meal]);
-    // en caso contrario, mostramos 
+    // en caso contrario, mostramos vista que solo da información
+    else
+      this.router.navigate(['/food', food]);
   }
 
 }

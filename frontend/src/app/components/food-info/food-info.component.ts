@@ -13,6 +13,8 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 })
 export class FoodInfoComponent implements OnInit {
   public food: Food;
+  public calculatedFood: Food;
+  public quantity;
   public token;
   public identity;
   public foodId;
@@ -26,11 +28,14 @@ export class FoodInfoComponent implements OnInit {
     this.token = this._userService.getToken();
     this.identity = this._userService.getIdentity();
     this.food = new Food('','','','', [], 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-    
+    this.calculatedFood = new Food('','','','', [], 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    this.quantity = 100;
     this._route.params.subscribe(params => {
       this.foodId = params.id;
       this.getFood(this.foodId);
     })
+
+    
   }
 
   ngOnInit() {
@@ -41,11 +46,16 @@ export class FoodInfoComponent implements OnInit {
     this._foodService.getFood(this.foodId,this.token).subscribe(
       response =>{
         this.food = response.food;
+        this.calculatedFood = this._foodService.calculateFoodNutrient(this.food, this.quantity);
         console.log(response.food);
       },
       error => {
         console.log();
       }
     );
+  }
+
+  onInput(){
+    this.calculatedFood = this._foodService.calculateFoodNutrient(this.food, this.quantity);
   }
 }

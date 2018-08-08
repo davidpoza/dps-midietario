@@ -1,0 +1,24 @@
+.quantity{
+    padding: 20px;
+}
+
+.quantity-label{
+  
+
+}
+
+.quantity-input{
+    float: right
+}
+
+.nutrient{
+    color: white;
+    border-radius: 5px;
+    background-color: rgb(22, 22, 22);
+    margin: 10px;
+    text-align: center;
+}
+
+.nutrient .value{
+    color: #5ddfc9;
+}

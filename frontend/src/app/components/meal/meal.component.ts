@@ -3,6 +3,7 @@ import { FoodService } from '../../../services/food.service';
 import { UserService } from '../../../services/user.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
+import * as moment from 'moment';
 
 @Component({
   selector: 'meal',
@@ -31,12 +32,18 @@ export class MealComponent implements OnInit {
   ) {
     this.token = this._userService.getToken();
     this.identity = this._userService.getIdentity();
-    this._route.params.subscribe(params => {
-      this.date = params.date;
-    })
+    
   }
 
+  //@Input() diary está disponible cuando la vista ha cargado-> ngOnInit
   ngOnInit() {
+    this._route.params.subscribe(params => {
+      if(params.date)
+        this.date = params.date;
+      else{
+        this.date = moment(this.diary).format("YYYY-MM-DD")
+      }
+    })
   }
 
   deleteFood(food, meal, index){

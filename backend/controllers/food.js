@@ -84,14 +84,14 @@ var controller = {
     deleteFoodFromDiary: function(req,res){
         var params = req.body;       
         var foodId = params.food;
-        var diaryId = params.diary;
         var mealIndex = params.meal; // el indice del array de meals donde vamos a borrar
-
+        //obtenemos el diario a partir de la fecha
+        var diaryDate = new Date(params.date);
         if(!foodId) return res.status(404).send({message: 'No ha indicado alimento a borrar'});
         if(!diaryId) return res.status(404).send({message: 'No ha indicado diario'});
         if(!mealIndex) return res.status(404).send({message: 'No ha indicado meal'});
 
-        Diary.findOne({_id:diaryId}).exec((err, diary) => {
+        Diary.findOne({date:diaryDate}).exec((err, diary) => {
             if(err) return res.status(500).send({message: 'Error al seleccionar diario.'});
             if(!diary) return res.status(404).send({message: 'No existe el diario.'});
             

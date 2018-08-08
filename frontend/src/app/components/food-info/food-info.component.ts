@@ -69,7 +69,7 @@ export class FoodInfoComponent implements OnInit {
   addFoodToDiary(){
     this._foodService.addFoodToDiary(this.foodId, this.date, this.meal, this.quantity, this.token).subscribe(
       response =>{
-        this.router.navigate(['/']);
+        this.router.navigate(['/diary', this.date]);
         this.snackBar.open("Alimento añadido al diario con exito.", '', {
           duration: 500,
         });          

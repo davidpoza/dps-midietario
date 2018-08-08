@@ -11,6 +11,7 @@ import { RegisterUserFormComponent } from './components/register-user-form/regis
 
 const appRoutes: Routes = [
     { path: '', component: DiaryComponent},
+    { path: 'diary/:date', component: DiaryComponent},
     { path: 'foods', component: FoodsComponent},
     { path: 'addfood', component: AddFoodFormComponent},
     { path: 'food/:id/:date/:meal', component: FoodInfoComponent},

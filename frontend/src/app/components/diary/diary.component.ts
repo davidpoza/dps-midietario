@@ -9,6 +9,7 @@ import { UserService } from '../../../services/user.service';
 import { DiaryService } from '../../../services/diary.service';
 import { AppService } from '../../../services/app.service';
 
+import { Router, ActivatedRoute, Params } from '@angular/router';
 
 class MyDateAdapter extends NativeDateAdapter {
   format(date: Date, displayFormat: Object): string {
@@ -39,10 +40,21 @@ export class DiaryComponent implements OnInit {
     private _diaryService: DiaryService,
     private _userService: UserService,
     private _appService: AppService,
+    private _route: ActivatedRoute,
+    private router: Router,
   ) { 
     this.token = this._userService.getToken();
     this.identity = this._userService.getIdentity();
-    this.date = new Date();
+    this._route.params.subscribe(params => {
+      this.date = params.date;
+      //si pasamos una fecha como parametro en la url mostramos el diario de esa fecha
+      if(this.date)
+        this.date = new Date(this.date);
+      else
+        this.date = new Date();
+    })
+
+    
   }
 
   ngOnInit() {

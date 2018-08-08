@@ -45,6 +45,7 @@ var controller = {
         var diaryDate = new Date(params.date);
 
         Diary.findOne({date: diaryDate}).exec((err, diary) => {
+            console.log(diary);
             if(err) return res.status(500).send({message: 'Error al devolver diario.'});
             if(!diary) {
                 //no existe el diario asi que lo creamos
@@ -88,22 +89,25 @@ var controller = {
         //obtenemos el diario a partir de la fecha
         var diaryDate = new Date(params.date);
         if(!foodId) return res.status(404).send({message: 'No ha indicado alimento a borrar'});
-        if(!diaryId) return res.status(404).send({message: 'No ha indicado diario'});
-        if(!mealIndex) return res.status(404).send({message: 'No ha indicado meal'});
+        if(!diaryDate) return res.status(404).send({message: 'No ha indicado diario'});
+        if(mealIndex==='') return res.status(404).send({message: 'No ha indicado meal'});
 
         Diary.findOne({date:diaryDate}).exec((err, diary) => {
             if(err) return res.status(500).send({message: 'Error al seleccionar diario.'});
             if(!diary) return res.status(404).send({message: 'No existe el diario.'});
             
-            // borramos el id del alimento correcto
-
-            for (let i = 0; i < diary.meals[mealIndex].foods.length; i++) {
-                if(diary.meals[mealIndex].foods[i] == foodId)
-                diary.meals[mealIndex].foods.splice(i, 1);               
+            // borramos el id del alimento correcto   
+            console.log(diary.meals[mealIndex].foods.length);         
+            for (let i = 0; i < diary.meals[mealIndex].foods.length; i++) {  
+                if(diary.meals[mealIndex].foods[i].refFood == foodId){                    
+                    diary.meals[mealIndex].foods.splice(i, 1);   
+                    console.log("borramos comida del diario");
+                }
+                            
             }
   
             // actualizamos el diario
-            Diary.findByIdAndUpdate(diaryId, diary, {new:true}, (err, diaryUpdated) => {
+            Diary.findByIdAndUpdate(diary._id, diary, {new:true}, (err, diaryUpdated) => {
                 if(err) return res.status(500).send({message: 'Error al actualizar diario.'});
                 if(!diaryUpdated) return res.status(404).send({message: 'No existe el diario a actualizar'});
                 return res.status(200).send({diary: diaryUpdated})

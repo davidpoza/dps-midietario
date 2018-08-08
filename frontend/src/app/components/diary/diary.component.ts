@@ -90,7 +90,7 @@ export class DiaryComponent implements OnInit {
     this._diaryService.getDiary(this.token, this.dateString).subscribe(
       response =>{
         this.diary = this._diaryService.calculateDiary(response.diary);
-        console.log(this.diary);
+        //console.log(this.diary);
     
       },
       error => {

@@ -58,6 +58,18 @@ export class FoodService{
         return this._http.post(this.url+'addfoodtodiary', params, {headers:headers});
     }
     
+    /*usamos un metodo post y no un metodo delete porque necesito pasar un objeto json */
+    deleteFoodFromDiary(food, date, mealIndex, token):Observable<any>{
+        let headers = new HttpHeaders().set('Content-Type', 'application/json')
+        .set('Authorization', token);
+        let params = {
+            food: food,
+            date: date,
+            meal: mealIndex,
+        };
+        return this._http.post(this.url+'deletefoodfromdiary', params, {headers:headers});
+    }
+
     calculateFoodNutrient(food, quantity){
         var food_result = new Food('','','','', [], 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
         food_result.protein = food.protein * quantity / 100;

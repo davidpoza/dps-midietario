@@ -28,6 +28,7 @@ export class FoodsComponent implements OnInit {
     public dialog: MatDialog,
     public snackBar: MatSnackBar,
     private _route: ActivatedRoute,
+    private router: Router
   ) {
     this.token = this._userService.getToken();
     this.identity = this._userService.getIdentity();
@@ -81,9 +82,10 @@ export class FoodsComponent implements OnInit {
     });    
   }
 
-  onClick(){
+  onClick(food, date, meal){
     // si le estamos pasando diary y meal como parametros en la url entonces insertamos alimento
-
+    if(food && date && meal)
+      this.router.navigate(['/food', food, date, meal]);
     // en caso contrario, mostramos 
   }
 

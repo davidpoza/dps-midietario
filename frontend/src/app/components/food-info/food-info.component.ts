@@ -3,6 +3,7 @@ import { Food } from '../../../models/food';
 import { UserService } from '../../../services/user.service';
 import { AppService } from '../../../services/app.service';
 import { FoodService } from '../../../services/food.service';
+import { MatSnackBar } from '@angular/material';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
 @Component({
@@ -19,12 +20,15 @@ export class FoodInfoComponent implements OnInit {
   public identity;
   public foodId;
   public date;
+  public meal;
 
   constructor(
     private _foodService: FoodService,
     private _userService: UserService,
     private _appService: AppService,
+    public snackBar: MatSnackBar,
     private _route: ActivatedRoute,
+    private router: Router,
   ) {
     this.token = this._userService.getToken();
     this.identity = this._userService.getIdentity();
@@ -34,6 +38,7 @@ export class FoodInfoComponent implements OnInit {
     this._route.params.subscribe(params => {
       this.foodId = params.id;
       this.date = params.date;
+      this.meal = params.meal;
       this.getFood(this.foodId);
     })
 
@@ -59,5 +64,20 @@ export class FoodInfoComponent implements OnInit {
 
   onInput(){
     this.calculatedFood = this._foodService.calculateFoodNutrient(this.food, this.quantity);
+  }
+
+  addFoodToDiary(){
+    this._foodService.addFoodToDiary(this.foodId, this.date, this.meal, this.quantity, this.token).subscribe(
+      response =>{
+        this.router.navigate(['/']);
+        this.snackBar.open("Alimento añadido al diario con exito.", '', {
+          duration: 500,
+        });          
+        console.log(response.diary);
+      },
+      error => {
+        console.log();
+      }
+    );
   }
 }

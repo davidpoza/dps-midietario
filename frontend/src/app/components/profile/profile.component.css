@@ -1,0 +1,13 @@
+.profileForm{
+    
+    padding: 10px;
+    margin-top: 20%;
+}
+
+.profileForm > *{
+    width: 100%;
+}
+
+.profileForm h1{
+    margin-bottom: 30px;
+}

@@ -1,3 +1,28 @@
-<p>
-  profile works!
-</p>
+<div class="container">
+    <div class="row justify-content-center">
+      <div class="col col-lg-6 ">
+                
+        <form #profileForm="ngForm" class="profileForm">
+          <h1>Mi perfil</h1>
+          <mat-form-field>
+            <input name="name" matInput placeholder="Nombre" [(ngModel)]="identity.name" required>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input name="quantity" matInput type="email" placeholder="Email" [(ngModel)]="identity.email" required>
+          </mat-form-field>
+
+          
+
+          <p>
+            Imagen<br />
+            <input type="file" name="image" placeholder="imagen" (change)="fileChangeEvent($event)">
+
+          </p>
+            
+          <h1>Parámetros</h1>
+          
+          <button mat-raised-button color="primary" (click) = "onSave(profileForm)" [disabled]="!profileForm.form.valid" >Guardar</button> 
+        </form>
+  </div>
+  </div>

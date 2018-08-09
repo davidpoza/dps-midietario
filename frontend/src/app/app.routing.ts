@@ -2,6 +2,7 @@ import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { DiaryComponent } from './components/diary/diary.component';
+import { ProfileComponent } from './components/profile/profile.component';
 import { LoginComponent } from './components/login/login.component';
 import { FoodsComponent } from './components/foods/foods.component';
 import { AddFoodFormComponent } from './components/add-food-form/add-food-form.component';
@@ -17,6 +18,7 @@ const appRoutes: Routes = [
     { path: 'food/:id/:date/:meal', component: FoodInfoComponent},
     { path: 'food/:id', component: FoodInfoComponent},
     { path: 'foods/:date/:meal', component: FoodsComponent},
+    { path: 'profile', component: ProfileComponent},
     { path: 'login', component: LoginComponent},
     { path: 'register', component: RegisterUserFormComponent},
 

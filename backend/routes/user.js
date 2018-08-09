@@ -18,5 +18,6 @@ router.delete('/users/:id', UserController.deleteUser);
 router.post('/users', UserController.addUser);
 router.post('/login', UserController.loginUser);
 router.get('/protegido', md_auth.ensureAuth, UserController.protegido);
-
+router.post('/uploaduserimage/:id', /*md_auth.ensureAuth,*/ multipartMiddleware, UserController.uploadImage);
+router.get('/getuserimage/:file', multipartMiddleware, UserController.getImage);
 module.exports = router;

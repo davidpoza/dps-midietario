@@ -2,7 +2,8 @@
 var bcrypt = require('bcrypt-nodejs')
 var User = require('../models/user')
 var jwt = require('../services/jwt');
-var mongoosePaginate = require('mongoose-pagination');
+var fs = require('fs');
+var path = require('path');
 
 var controller = {
     getUsers: function(req,res){
@@ -144,7 +145,48 @@ var controller = {
             user: req.user,
             message:'ruta protegida'
         })
-    }
+    },
+
+    /*la imagen se sube con el middleware multiparty*/
+    uploadImage: function(req,res){
+        var userId = req.params.id;
+        var fileName = "Imagen no subida";
+
+        if(req.files){
+            var filePath = req.files.image.path;
+            //var fileSplit = filePath.split("/");
+            var fileSplit = filePath.split("\\");
+            var fileName = fileSplit[1];
+            User.findByIdAndUpdate(userId, {image: fileName},{new:true}, (err, userUpdated) => {
+                if(err) return res.status(500).send({message: 'La imagen no se ha subido.'});
+                if(!userUpdated) return res.status(404).send({message: 'El usuario no existe.'});
+                return res.status(200).send({
+                    user: userUpdated
+                });
+            })
+        }
+        else{
+            return res.status(500).send({
+                massage: fileName
+            });
+        }
+    },
+
+    getImage: function(req, res){
+        var file = req.params.file;
+        var filepath = './uploads/'+file;
+        
+        fs.exists(filepath, (exists) => {
+            if(exists){
+                return res.sendFile(path.resolve(filepath));
+            }
+            else{
+                return res.status(200).send({
+                    message: 'No existe la imagen'
+                })
+            }
+        })
+    },
 
 }
 

@@ -13,7 +13,8 @@ var UserSchema = Schema({
     height: Number,
     weight: Number,
     activity_level: Number,
-    tmb: Number    
+    tmb: Number,
+    image: String,    
 });
 
 module.exports = mongoose.model('User', UserSchema);

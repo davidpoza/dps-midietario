@@ -2,6 +2,7 @@
   
     <mat-sidenav #sidenav>
         <mat-nav-list>
+            <img class="avatar" *ngIf="identity && identity.image" src="{{url+'getuserimage/'+identity.image}}" />
           <a *ngIf="!identity" mat-list-item [routerLink]="['/login']" (click)="sidenav.toggle()">Login</a>
           <a *ngIf="identity" mat-list-item>Hola {{identity.name}}!</a>
           <a *ngIf="identity" [routerLink]="['/']" [routerLinkActive]="['actived']" mat-list-item (click)="sidenav.toggle()"><mat-icon mat-list-icon>calendar_today</mat-icon>Diario</a>

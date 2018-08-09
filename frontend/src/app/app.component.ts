@@ -1,6 +1,8 @@
 import { Component,OnInit,DoCheck } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { AppService } from '../services/app.service';
+import { Global } from '../services/global';
+
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import { Observable, Subscribable } from 'rxjs/Observable'; 
@@ -18,7 +20,7 @@ export class AppComponent implements OnInit, DoCheck {
   public title$: Observable<String>;
   public titleSubscription: Subscription;
   public showRegister;
-
+  public url: String;
   public showMenu: boolean = true;
   public showMenu$: Observable<boolean>;
   public showMenuSubscription: Subscription;
@@ -28,8 +30,9 @@ export class AppComponent implements OnInit, DoCheck {
     private _appService: AppService,
     private _route: ActivatedRoute,
     private location: Location,
-    public _router: Router
+    public _router: Router,
   ){
+    this.url = Global.url;
     this.showRegister = false;
     if( this._router.url == '/register' )
       this.showRegister = true;

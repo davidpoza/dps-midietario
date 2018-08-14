@@ -13,7 +13,10 @@ export class User{
         public activity_level: number,
         public formula: number,
         public tmb: number,
-        public image: string,    
+        public image: string,
+        public proteinTarget: number,
+        public carbohydratesTarget: number,
+        public kcalTarget: number    
     ){
 
     }

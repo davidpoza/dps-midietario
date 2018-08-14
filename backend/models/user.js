@@ -16,7 +16,12 @@ var UserSchema = Schema({
     activity_level: Number,
     tmb: Number,
     image: String,
-    formula: Number    
+    formula: Number,
+
+    //los valores por defecto aunque luego cada diario puede cambiarlos
+    proteinTarget: Number,
+    carbohydratesTarget: Number,
+    kcalTarget: Number    
 });
 
 module.exports = mongoose.model('User', UserSchema);

@@ -43,6 +43,16 @@ var controller = {
             return res.status(200).send({diary});
         })
     },
+    updateDiary: function(req,res){
+        var diaryId = req.params.id;
+        var update = req.body;
+        
+        Diary.findByIdAndUpdate(diaryId, update, {new:true}, (err, diaryUpdated) => {
+            if(err) return res.status(500).send({message: 'Error al actualizar diario.'});
+            if(!diaryUpdated) return res.status(404).send({message: 'No existe el diario a actualizar'});
+            return res.status(200).send({item: diaryUpdated})
+        });  
+    },
     /*
     getItems: function(req,res){
         Food.find({}).populate({path: 'list',populate : {path : 'user'}}).exec((err, items) => {

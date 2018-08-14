@@ -12,6 +12,7 @@ var md_auth = require('../middleware/authenticated');
 
 router.post('/diaries', /*md_auth.ensureAuth,*/ DiaryController.addDiary);
 router.get('/diaries/:date', /*md_auth.ensureAuth,*/ DiaryController.getDiary);
+router.put('/diaries/:id', md_auth.ensureAuth, DiaryController.updateDiary);
 /*router.get('/listitems/:id', md_auth.ensureAuth, ItemController.getListItems);
 router.get('/items/:id', md_auth.ensureAuth, ItemController.getItem);
 router.put('/items/:id', md_auth.ensureAuth, ItemController.updateItem);

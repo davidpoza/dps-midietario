@@ -29,7 +29,7 @@ export class ProfileComponent implements OnInit {
 
   onSave(form){
     this._userService.updateUser(this.identity._id, this.identity, this.token).subscribe(
-      response => {
+      response => {        
         if(this.filesToUpload) {
           this._userService.makeFileRequest(this.url+"uploaduserimage/"+ response.user._id, [], this.filesToUpload, "image", this.token).then((result:any) => {
             
@@ -49,6 +49,17 @@ export class ProfileComponent implements OnInit {
     );
   }
   
+  recalculate(){
+    this.identity.tmb = this._userService.calculateBMR(
+      this.identity.formula,
+      this.identity.sex,
+      this.identity.age,
+      this.identity.height,
+      this.identity.weight,
+      this.identity.fat,      
+      this.identity.activity_level);
+  }
+
   fileChangeEvent(fileInput: any){
     this.filesToUpload = <Array<File>>fileInput.target.files;
   }

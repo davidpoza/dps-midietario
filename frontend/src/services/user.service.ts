@@ -107,4 +107,24 @@ export class UserService{
             xhr.send(formData);
         });
     }
+
+    calculateBMR(formula,sex,age,height,weight,fat,activity_level){
+        var result = 0;
+        //Mifflin St Jeor
+        if(formula == 0){
+            if(sex == 0){ //hombre
+                result = (9.99*weight+6.25*height-4.92*age+5);
+            }
+            else{ //mujer
+                result = (9.99*weight+6.25*height-4.92*age-161);
+            }
+            
+        }
+        //Katch-McArdle
+        else if (formula ==1){
+            var lean_mass = weight - weight*fat/100;
+            result = 370 + (21.6*(lean_mass));
+        }
+        return Math.trunc(result*activity_level);
+    }
 }

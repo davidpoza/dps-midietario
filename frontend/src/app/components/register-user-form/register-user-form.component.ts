@@ -17,7 +17,7 @@ export class RegisterUserFormComponent implements OnInit {
     private _userService: UserService,
     public snackBar: MatSnackBar,
   ) {
-    this.user = new User('','','','','','m',0,0,0,0,0,0,0,'');
+    this.user = new User('','','','','',0,0,0,0,0,0,0,0,'');
 
    }
 

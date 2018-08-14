@@ -40,7 +40,7 @@ export class DiaryService{
             diary.proteinTarget,
             diary.carbohydratesTarget,
             diary.kcalTarget, 
-            0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0,
             diary.meals
         );
         //inicializamos los totales diarios
@@ -87,12 +87,14 @@ export class DiaryService{
             diary.totalKcal,
             diary.carbohydratesTargetInGrams,
             diary.fatTargetInGrams,
+            diary.proteinTargetInPercentage,
+            diary.fatTargetInPercentage,
             diary.meals
         );
        result_diary.carbohydratesTargetInGrams =  Math.trunc((result_diary.carbohydratesTarget * result_diary.kcalTarget) / (4*100));
        result_diary.fatTargetInGrams =  Math.trunc((result_diary.kcalTarget - diary.proteinTarget*4 - ((result_diary.carbohydratesTarget * result_diary.kcalTarget) / (100))) / (9));
-       
-       
+       result_diary.proteinTargetInPercentage = Math.trunc(diary.proteinTarget*4*100/result_diary.kcalTarget);
+       result_diary.fatTargetInPercentage = 100 - result_diary.proteinTargetInPercentage - result_diary.carbohydratesTarget;
        return result_diary; 
     }
     

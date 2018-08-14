@@ -4,14 +4,14 @@
  }
  
  .macro{
-     font-size: 20px;
+     font-size: 18px;
      color: rgb(22, 22, 22);
      background-color: #5ddfc9;
      text-align: center;
      padding-top: 20px;
      padding-bottom: 20px;
      margin: 10px;
-     width: 90px;
+     width: 110px;
      border-radius: 10px;
  }
 

@@ -11,6 +11,8 @@ export class Diary{
         public totalKcal: number,
         public carbohydratesTargetInGrams: number,
         public fatTargetInGrams: number,
+        public proteinTargetInPercentage: number,
+        public fatTargetInPercentage: number,
         public meals: Array<any>
     ){
 

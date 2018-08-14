@@ -14,13 +14,25 @@
   </div>
   <div mat-line class="container">
       <div class="row justify-content-center">
-          <div class="col-auto macro">P:{{diary.totals.protein}}<br/>200g.</div>
-          <div class="col-auto macro">C:{{diary.totals.carbohydrates}}</div>
-          <div class="col-auto macro">G:{{diary.totals.fat}}</div>
-          <div class="col-auto macro">Cal:{{diary.totals.kcal}}</div>
+          <div class="col-auto macro">P:{{diary.totalProtein}}<br/>{{diary.proteinTarget}}</div>
+          <div class="col-auto macro">C:{{diary.totalCarbohydrate}}</div>
+          <div class="col-auto macro">G:{{diary.totalFat}}</div>
+          <div class="col-auto macro">Cal:{{diary.totalKcal}}<br/>{{diary.kcalTarget}}</div>
       </div>
   </div>
+
+  <div class="container">
+      <div class="row justify-content-center">
+        <div class="col">                  
+          {{diary.proteinTarget}}<br />
+        </div>
+        <div class="col">                  
+          {{diary.carbohydratesTarget}}<br />
+        </div>
+        
+    </div>
 </div>
+
 <div *ngIf="!diary">
     No hay entradas en esta fecha
 </div>

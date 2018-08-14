@@ -19,7 +19,17 @@
             <input type="file" name="image" placeholder="imagen" (change)="fileChangeEvent($event)">
 
           </p>
-            
+          <h3>Macronutrientes</h3>
+          <mat-form-field>
+            <input name="proteintarget" matInput  placeholder="Proteinas(g. por kilo peso corporal)" [(ngModel)]="identity.proteinTarget" (input)="recalculate()" required>
+          </mat-form-field>
+          <mat-form-field>
+            <input name="carbohydratestarget" matInput  placeholder="Carbohidratos (porcentaje)" [(ngModel)]="identity.carbohydratesTarget" (input)="recalculate()" required>
+          </mat-form-field> 
+          <mat-form-field>
+            <input name="kcaltarget" matInput  placeholder="kcal" [(ngModel)]="identity.kcalTarget" (input)="recalculate()" required>
+          </mat-form-field> 
+
           <h3>Parámetros fisiológicos</h3>
           <mat-form-field>
             <mat-select name="sex" [(ngModel)]="identity.sex" placeholder="Sexo" (selectionChange)="recalculate()" required>

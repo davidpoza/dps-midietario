@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Diary } from '../../../models/diary';
 import { NativeDateAdapter } from '@angular/material';
 import {DateAdapter} from '@angular/material/core';
 
@@ -33,7 +34,7 @@ export class DiaryComponent implements OnInit {
   public date: Date;
   public token;
   public identity;
-  public diary;
+  public diary: Diary;
   public dateString;
 
   constructor(
@@ -94,7 +95,7 @@ export class DiaryComponent implements OnInit {
     
       },
       error => {
-        this.diary = '';
+        this.diary = null;
         console.log();
       }
     );

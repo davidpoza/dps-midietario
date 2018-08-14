@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { Global } from './global';
+import { Diary } from '../models/diary';
 
 @Injectable()
 export class DiaryService{
@@ -25,40 +26,45 @@ export class DiaryService{
     }
 
     //hacemos los calculos de macros respecto de las cantidades indicadas.
-    calculateDiary(diary){
+    calculateDiary(diary):Diary{
+        console.log(diary);
+        var result_diary = new Diary('', 
+            new Date(),
+            diary.proteinTarget,
+            diary.carbohydratesTarget,
+            diary.kcalTarget, 
+            0, 0, 0, 0,
+            diary.meals
+        );
         //inicializamos los totales diarios
-        diary.totals = {};
-        diary.totals.protein = 0;
-        diary.totals.carbohydrates = 0;
-        diary.totals.fat = 0;
-        diary.totals.kcal = 0;    
+  
        for(var i=0;i<diary.meals.length;i++){
            //inicializamos los subtotales de cada meal
-            diary.meals[i].totals = {};
-            diary.meals[i].totals.protein = 0;
-            diary.meals[i].totals.carbohydrates = 0;
-            diary.meals[i].totals.fat = 0;
-            diary.meals[i].totals.kcal = 0;           
+            result_diary.meals[i].totals = {};
+            result_diary.meals[i].totals.protein = 0;
+            result_diary.meals[i].totals.carbohydrates = 0;
+            result_diary.meals[i].totals.fat = 0;
+            result_diary.meals[i].totals.kcal = 0;           
             for(var j=0;j<diary.meals[i].foods.length;j++){
-                diary.meals[i].foods[j].refFood.protein = (diary.meals[i].foods[j].quantity * diary.meals[i].foods[j].refFood.protein) / 100;
-                diary.meals[i].foods[j].refFood.carbohydrates = (diary.meals[i].foods[j].quantity * diary.meals[i].foods[j].refFood.carbohydrates) / 100;
-                diary.meals[i].foods[j].refFood.fat = (diary.meals[i].foods[j].quantity * diary.meals[i].foods[j].refFood.fat) / 100;
-                diary.meals[i].foods[j].refFood.kcal = (diary.meals[i].foods[j].quantity * diary.meals[i].foods[j].refFood.kcal) / 100;
+                result_diary.meals[i].foods[j].refFood.protein = (diary.meals[i].foods[j].quantity * diary.meals[i].foods[j].refFood.protein) / 100;
+                result_diary.meals[i].foods[j].refFood.carbohydrates = (diary.meals[i].foods[j].quantity * diary.meals[i].foods[j].refFood.carbohydrates) / 100;
+                result_diary.meals[i].foods[j].refFood.fat = (diary.meals[i].foods[j].quantity * diary.meals[i].foods[j].refFood.fat) / 100;
+                result_diary.meals[i].foods[j].refFood.kcal = (diary.meals[i].foods[j].quantity * diary.meals[i].foods[j].refFood.kcal) / 100;
                 
                 //calculamos subtotales de meal
-                diary.meals[i].totals.protein += diary.meals[i].foods[j].refFood.protein;
-                diary.meals[i].totals.carbohydrates += diary.meals[i].foods[j].refFood.carbohydrates;
-                diary.meals[i].totals.fat += diary.meals[i].foods[j].refFood.fat;
-                diary.meals[i].totals.kcal += diary.meals[i].foods[j].refFood.kcal;
+                result_diary.meals[i].totals.protein += diary.meals[i].foods[j].refFood.protein;
+                result_diary.meals[i].totals.carbohydrates += diary.meals[i].foods[j].refFood.carbohydrates;
+                result_diary.meals[i].totals.fat += diary.meals[i].foods[j].refFood.fat;
+                result_diary.meals[i].totals.kcal += diary.meals[i].foods[j].refFood.kcal;
                 console.log(diary.meals[i].foods[j].refFood.name);
             }
             //acumulamos todos los meal en el total diario
-            diary.totals.protein += diary.meals[i].totals.protein;
-            diary.totals.carbohydrates += diary.meals[i].totals.carbohydrates;
-            diary.totals.fat += diary.meals[i].totals.fat;
-            diary.totals.kcal += diary.meals[i].totals.kcal;
+            result_diary.totalProtein += diary.meals[i].totals.protein;
+            result_diary.totalCarbohydrate += diary.meals[i].totals.carbohydrates;
+            result_diary.totalFat += diary.meals[i].totals.fat;
+            result_diary.totalKcal += diary.meals[i].totals.kcal;
        }
-       return diary; 
+       return result_diary; 
     }
     
 }

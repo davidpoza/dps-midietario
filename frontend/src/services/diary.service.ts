@@ -25,7 +25,13 @@ export class DiaryService{
     }
 
     //hacemos los calculos de macros respecto de las cantidades indicadas.
-    calculateDiary(diary){        
+    calculateDiary(diary){
+        //inicializamos los totales diarios
+        diary.totals = {};
+        diary.totals.protein = 0;
+        diary.totals.carbohydrates = 0;
+        diary.totals.fat = 0;
+        diary.totals.kcal = 0;    
        for(var i=0;i<diary.meals.length;i++){
            //inicializamos los subtotales de cada meal
             diary.meals[i].totals = {};
@@ -43,9 +49,14 @@ export class DiaryService{
                 diary.meals[i].totals.protein += diary.meals[i].foods[j].refFood.protein;
                 diary.meals[i].totals.carbohydrates += diary.meals[i].foods[j].refFood.carbohydrates;
                 diary.meals[i].totals.fat += diary.meals[i].foods[j].refFood.fat;
-                diary.meals[i].totals.kcal += diary.meals[i].foods[j].refFood.kcal ;
+                diary.meals[i].totals.kcal += diary.meals[i].foods[j].refFood.kcal;
                 console.log(diary.meals[i].foods[j].refFood.name);
             }
+            //acumulamos todos los meal en el total diario
+            diary.totals.protein += diary.meals[i].totals.protein;
+            diary.totals.carbohydrates += diary.meals[i].totals.carbohydrates;
+            diary.totals.fat += diary.meals[i].totals.fat;
+            diary.totals.kcal += diary.meals[i].totals.kcal;
        }
        return diary; 
     }

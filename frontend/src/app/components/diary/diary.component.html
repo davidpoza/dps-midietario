@@ -8,9 +8,17 @@
   <button mat-button (click)="nextDay()">></button>
 </p>
 
-<div *ngIf="diary">
+<div *ngIf="diary">  
   <div *ngFor="let meal of diary.meals; let i = index">
     <meal [name]="meal.name" [foods]="meal.foods" [totals]="meal.totals" [diary]="dateString" [index]="i"></meal>
+  </div>
+  <div mat-line class="container">
+      <div class="row justify-content-center">
+          <div class="col-auto macro">P:{{diary.totals.protein}}<br/>200g.</div>
+          <div class="col-auto macro">C:{{diary.totals.carbohydrates}}</div>
+          <div class="col-auto macro">G:{{diary.totals.fat}}</div>
+          <div class="col-auto macro">Cal:{{diary.totals.kcal}}</div>
+      </div>
   </div>
 </div>
 <div *ngIf="!diary">

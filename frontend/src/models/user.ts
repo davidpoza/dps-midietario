@@ -12,10 +12,10 @@ export class User{
         public fat: number,
         public activity_level: number,
         public formula: number,
-        public tmb: number,
+        public bmr: number,
         public image: string,
-        public proteinTarget: number,
-        public carbohydratesTarget: number,
+        public proteinTarget: number, //el gramos por kilo de peso
+        public carbohydratesTarget: number, //el porcentaje del total calórico
         public kcalTarget: number    
     ){
 

@@ -49,15 +49,15 @@ export class ProfileComponent implements OnInit {
     );
   }
   
-  recalculate(){
-    this.identity.tmb = this._userService.calculateBMR(
-      this.identity.formula,
-      this.identity.sex,
-      this.identity.age,
-      this.identity.height,
-      this.identity.weight,
-      this.identity.fat,      
-      this.identity.activity_level);
+  calculateBMR(){
+    this.identity.bmr = this._userService.calculateBMR(
+    this.identity.formula,
+    this.identity.sex,
+    this.identity.age,
+    this.identity.height,
+    this.identity.weight,
+    this.identity.fat,      
+    this.identity.activity_level);
   }
 
   fileChangeEvent(fileInput: any){

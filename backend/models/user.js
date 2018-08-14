@@ -14,7 +14,7 @@ var UserSchema = Schema({
     weight: Number,
     fat: Number,
     activity_level: Number,
-    tmb: Number,
+    bmr: Number,
     image: String,
     formula: Number,
 

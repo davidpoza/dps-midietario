@@ -86,8 +86,8 @@ export class DiaryComponent implements OnInit {
     this.getDiary();
   }
 
-  //recalcula porcentajes usando el diario que ya tiene descargado
-  recalculate(){
+  //calcula los porcentajes y gramos de las macros objetivo del diario local y los salva en db
+  calculateMacros(){
     this.diary = this._diaryService.calculateMacros(this.diary);
     this._diaryService.updateDiary(this.token, this.diary._id, this.diary).subscribe(
       response =>{
@@ -105,7 +105,7 @@ export class DiaryComponent implements OnInit {
     this._diaryService.getDiary(this.token, this.dateString).subscribe(
       response =>{
         this.diary = this._diaryService.calculateDiary(response.diary);
-        this.recalculate();
+        this.calculateMacros();
         
     
       },

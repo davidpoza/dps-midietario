@@ -28,11 +28,11 @@
           <form #changeMacros="ngForm" class="changeMacrosForm">
             
             <mat-form-field>
-              <input name="proteinTarget" matInput  placeholder="Proteina (gramos por kilo de peso)" [(ngModel)]="diary.proteinTarget" (input)="recalculate()" required>
+              <input name="proteinTarget" matInput  placeholder="Proteina (gramos por kilo de peso)" [(ngModel)]="diary.proteinTarget" (input)="calculateMacros()" required>
             </mat-form-field>
   
             <mat-form-field>
-              <input name="fat" matInput  placeholder="Porcentaje de hidratos" [(ngModel)]="diary.carbohydratesTarget" (input)="recalculate()" required>
+              <input name="fat" matInput  placeholder="Porcentaje de hidratos" [(ngModel)]="diary.carbohydratesTarget" (input)="calculateMacros()" required>
             </mat-form-field>
   
            

@@ -74,6 +74,7 @@ export class DiaryService{
        return result_diary; 
     }
    
+    //calcula los porcentajes y gramos de las macros objetivo del diario dado
     calculateMacros(diary):Diary{
         var result_diary = new Diary(
             diary._id, 

@@ -19,43 +19,43 @@
             <input type="file" name="image" placeholder="imagen" (change)="fileChangeEvent($event)">
 
           </p>
-          <h3>Macronutrientes</h3>
+          <h3>Macronutrientes por defecto</h3>
           <mat-form-field>
-            <input name="proteintarget" matInput  placeholder="Proteinas(g. por kilo peso corporal)" [(ngModel)]="identity.proteinTarget" (input)="recalculate()" required>
+            <input name="proteintarget" matInput  placeholder="Proteinas(g. por kilo peso corporal)" [(ngModel)]="identity.proteinTarget" (input)="calculateBMR()" required>
           </mat-form-field>
           <mat-form-field>
-            <input name="carbohydratestarget" matInput  placeholder="Carbohidratos (porcentaje)" [(ngModel)]="identity.carbohydratesTarget" (input)="recalculate()" required>
+            <input name="carbohydratestarget" matInput  placeholder="Carbohidratos (porcentaje)" [(ngModel)]="identity.carbohydratesTarget" (input)="calculateBMR()" required>
           </mat-form-field> 
           <mat-form-field>
-            <input name="kcaltarget" matInput  placeholder="kcal" [(ngModel)]="identity.kcalTarget" (input)="recalculate()" required>
+            <input name="kcaltarget" matInput  placeholder="kcal objetivo" [(ngModel)]="identity.kcalTarget" (input)="calculateBMR()" required>
           </mat-form-field> 
 
           <h3>Parámetros fisiológicos</h3>
           <mat-form-field>
-            <mat-select name="sex" [(ngModel)]="identity.sex" placeholder="Sexo" (selectionChange)="recalculate()" required>
+            <mat-select name="sex" [(ngModel)]="identity.sex" placeholder="Sexo" (selectionChange)="calculateBMR()" required>
               <mat-option [value]="0">Hombre</mat-option>
               <mat-option [value]="1">Mujer</mat-option>
             </mat-select>
           </mat-form-field>
 
           <mat-form-field>
-            <input name="age" matInput  placeholder="Edad" [(ngModel)]="identity.age" (input)="recalculate()" required>
+            <input name="age" matInput  placeholder="Edad" [(ngModel)]="identity.age" (input)="calculateBMR()" required>
           </mat-form-field>
 
           <mat-form-field>
-            <input name="wieght" matInput  placeholder="Peso" [(ngModel)]="identity.weight" (input)="recalculate()" required>
+            <input name="wieght" matInput  placeholder="Peso" [(ngModel)]="identity.weight" (input)="calculateBMR()" required>
           </mat-form-field>
 
           <mat-form-field>
-            <input name="height" matInput  placeholder="Altura" [(ngModel)]="identity.height" (input)="recalculate()" required>
+            <input name="height" matInput  placeholder="Altura" [(ngModel)]="identity.height" (input)="calculateBMR()" required>
           </mat-form-field>
 
           <mat-form-field>
-            <input name="fat" matInput  placeholder="Porcentaje de grasa" [(ngModel)]="identity.fat" (input)="recalculate()" required>
+            <input name="fat" matInput  placeholder="Porcentaje de grasa" [(ngModel)]="identity.fat" (input)="calculateBMR()" required>
           </mat-form-field>
 
           <mat-form-field>
-            <mat-select name="activity" [(ngModel)]="identity.activity_level" placeholder="Actividad base" (selectionChange)="recalculate()">
+            <mat-select name="activity" [(ngModel)]="identity.activity_level" placeholder="Actividad base" (selectionChange)="calculateBMR()">
               <mat-option [value]="1.2">Personas sedentarias, prácticamente nada de ejercicio.</mat-option>
               <mat-option [value]="1.375">Personas ligeramente activas (ejercicio suave 1 a 3 veces por semana).</mat-option>
               <mat-option [value]="1.55">Personas moderadamente activas (ejercicio 3 a 5 veces por semana).</mat-option>
@@ -65,14 +65,14 @@
           </mat-form-field>
 
           <mat-form-field>
-            <mat-select name="formula" [(ngModel)]="identity.formula" placeholder="Fórmula para estimación" (selectionChange)="recalculate()">
+            <mat-select name="formula" [(ngModel)]="identity.formula" placeholder="Fórmula para estimación" (selectionChange)="calculateBMR()">
               <mat-option [value]="0">Mifflin St Jeor</mat-option>
               <mat-option [value]="1">Katch-McArdle</mat-option>
             </mat-select>
           </mat-form-field>
 
           <mat-form-field>
-            <input name="bmr" matInput  placeholder="Metabolismo basal" [(ngModel)]="identity.tmb" required>
+            <input name="bmr" matInput  placeholder="Metabolismo basal" [(ngModel)]="identity.bmr" required>
           </mat-form-field>
 
           <button mat-raised-button color="primary" (click) = "onSave(profileForm)" [disabled]="!profileForm.form.valid" >Guardar</button> 

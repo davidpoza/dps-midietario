@@ -2,12 +2,15 @@
 var Food = require('../models/food')
 var Meal = require('../models/meal')
 var Diary = require('../models/diary')
+var User = require('../models/user')
 
 var fs = require('fs');
 var path = require('path');
 var config = require('../config');
 
 var mongoosePaginate = require('mongoose-pagination');
+
+
 
 var controller = {
 
@@ -30,7 +33,22 @@ var controller = {
             return res.status(200).send({food: foodStored});    
         })
     },        
-
+    insertFoodInMeal: function(req, res, diary, foodId, mealIndex, quantity){
+        // buscamos el alimento para insertar su referencia en el meal correspondiente
+        Food.findOne({_id: foodId}).exec((err, food) => {
+            if(err) return res.status(500).send({message: 'Error al obtener el alimento'});
+            if(!food) return res.status(404).send({message: 'No existe el alimento.'});
+            var foodentry = {quantity: quantity, refFood: food._id}
+            diary.meals[mealIndex].foods.push(foodentry);
+    
+            //actualizamos el diario con el nuevo array de meals
+            Diary.findByIdAndUpdate(diary._id, diary, {new:true}, (err, diaryUpdated) => {
+                if(err) return res.status(500).send({message: 'Error al actualizar diario.'});
+                if(!diaryUpdated) return res.status(404).send({message: 'No existe el diario a actualizar'});
+                return res.status(200).send({diary: diaryUpdated})
+            });
+        })
+    },
 
     addFoodToDiary: function(req,res){
         var food = new Food();
@@ -45,42 +63,44 @@ var controller = {
         var diaryDate = new Date(params.date);
 
         Diary.findOne({date: diaryDate}).exec((err, diary) => {
-            console.log(diary);
+            
             if(err) return res.status(500).send({message: 'Error al devolver diario.'});
             if(!diary) {
-                //no existe el diario asi que lo creamos
-                var diary = new Diary();
-                diary.date = diaryDate;
-                diary.meals = Array();
-        
-                for(var i=0;i<config.mealsnumber;i++){
-                    var meal = new Meal.Meal()
-                    meal.name = config.meals[i];
-                    diary.meals.push(meal);
-                }
-                
-                diary.save((err, diaryStored) => {
-                    if(err) return res.status(500).send({message: 'Error al guardar diario.'});
-                    if(!diaryStored) return res.status(404).send({message: 'No se ha podido guardar el diario.'});  
-                })
-            }
-            // buscamos el alimento para insertar su referencia en el meal correspondiente
-            Food.findOne({_id: foodId}).exec((err, food) => {
-                if(err) return res.status(500).send({message: 'Error al obtener el alimento'});
-                if(!food) return res.status(404).send({message: 'No existe el alimento.'});
-                var foodentry = {quantity: quantity, refFood: food._id}
-                diary.meals[mealIndex].foods.push(foodentry);
+                //consultamos las macros que tiene definidas el usuario req.user.sub
+                User.findOne({_id: req.user.sub}).exec((err, user) => {
+                    if(err) return res.status(500).send({message: 'Error al consultar usuario'});
+                    if(!user) return res.status(404).send({message: 'No existe el usuario.'});
+                    
+                    //no existe el diario asi que lo creamos
+                    diary = new Diary();
+                    diary.proteinTarget = 1*user.weight;
+                    diary.carbohydratesTarget = 50;
+                    diary.date = diaryDate;
+                    diary.meals = Array();
 
-                //actualizamos el diario con el nuevo array de meals
-                Diary.findByIdAndUpdate(diary._id, diary, {new:true}, (err, diaryUpdated) => {
-                    if(err) return res.status(500).send({message: 'Error al actualizar diario.'});
-                    if(!diaryUpdated) return res.status(404).send({message: 'No existe el diario a actualizar'});
-                    return res.status(200).send({diary: diaryUpdated})
-                });
-            })
+                    for(var i=0;i<config.mealsnumber;i++){
+                        var meal = new Meal.Meal()
+                        meal.name = config.meals[i];
+                        diary.meals.push(meal);
+                    }
+                    
+                    diary.save((err, diaryStored) => {
+                        if(err) return res.status(500).send({message: 'Error al guardar diario.'});
+                        if(!diaryStored) return res.status(404).send({message: 'No se ha podido guardar el diario.'});
+                        
+                        controller.insertFoodInMeal(req, res, diary, foodId, mealIndex, quantity);
+                    })
+                   
+                }) 
+            }
+            else{ //si el diario existe                
+                controller.insertFoodInMeal(req, res, diary, foodId, mealIndex, quantity);  
+            }            
         })
     },
     
+    
+
 
     deleteFoodFromDiary: function(req,res){
         var params = req.body;       

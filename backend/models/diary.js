@@ -9,6 +9,9 @@ var Schema = mongoose.Schema;
 
 var DiarySchema = Schema({
     date: Date,
+    proteinTarget: Number, //g por kg de peso
+    carbohydratesTarget: Number, //porcentaje
+    kcalTarget: Number,
     meals: [{ type: MealSchema.MealSchema }]
 });
 

@@ -11,7 +11,7 @@ var multipartMiddleware = multipart({ uploadDir: './uploads' });
 var md_auth = require('../middleware/authenticated');
 
 router.post('/foods', /*md_auth.ensureAuth,*/ FoodController.addFood);
-router.post('/addfoodtodiary', /*md_auth.ensureAuth,*/ FoodController.addFoodToDiary);
+router.post('/addfoodtodiary', md_auth.ensureAuth, FoodController.addFoodToDiary);
 router.get('/foods', /*md_auth.ensureAuth,*/ FoodController.getFoods);
 router.get('/foods/:id', /*md_auth.ensureAuth,*/ FoodController.getFood);
 router.put('/foods/:id', /*md_auth.ensureAuth,*/ FoodController.updateFood);

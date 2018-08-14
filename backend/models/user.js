@@ -8,7 +8,7 @@ var UserSchema = Schema({
     nick: String,
     email: String,
     password: String,
-    sex: String,
+    sex: Number,
     age: Number,
     height: Number,
     weight: Number,

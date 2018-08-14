@@ -73,8 +73,9 @@ var controller = {
                     
                     //no existe el diario asi que lo creamos
                     diary = new Diary();
-                    diary.proteinTarget = 1*user.weight;
-                    diary.carbohydratesTarget = 50;
+                    diary.proteinTarget = 1*user.weight; // por defecto ponemos 1g por kilo de peso
+                    diary.carbohydratesTarget = 50; // por defecto ponemos 50% de carbohidratos
+                    diary.kcalTarget = user.tmb; //por defecto ponemos calorias de mantenimiento
                     diary.date = diaryDate;
                     diary.meals = Array();
 

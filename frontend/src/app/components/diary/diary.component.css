@@ -15,5 +15,15 @@
      border-radius: 10px;
  }
 
+ .changeMacrosForm{    
+    padding: 10px;
+}
 
+.changeMacrosForm > *{
+    width: 100%;
+}
+
+.changeMacrosForm h1{
+    margin-bottom: 30px;
+}
  

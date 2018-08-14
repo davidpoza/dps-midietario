@@ -83,7 +83,12 @@ export class DiaryComponent implements OnInit {
 
   onChangeDate(){
     this.date = new Date(this.date);
-    this.getDiary()
+    this.getDiary();
+  }
+
+  //recalcula porcentajes usando el diario que ya tiene descargado
+  recalculate(){
+    this.diary = this._diaryService.calculateMacros(this.diary);
   }
 
   getDiary(){
@@ -91,6 +96,7 @@ export class DiaryComponent implements OnInit {
     this._diaryService.getDiary(this.token, this.dateString).subscribe(
       response =>{
         this.diary = this._diaryService.calculateDiary(response.diary);
+        this.recalculate();
         //console.log(this.diary);
     
       },

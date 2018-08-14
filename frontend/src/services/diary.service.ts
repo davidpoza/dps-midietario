@@ -27,13 +27,12 @@ export class DiaryService{
 
     //hacemos los calculos de macros respecto de las cantidades indicadas.
     calculateDiary(diary):Diary{
-        console.log(diary);
         var result_diary = new Diary('', 
             new Date(),
             diary.proteinTarget,
             diary.carbohydratesTarget,
             diary.kcalTarget, 
-            0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0,
             diary.meals
         );
         //inicializamos los totales diarios
@@ -64,6 +63,27 @@ export class DiaryService{
             result_diary.totalFat += diary.meals[i].totals.fat;
             result_diary.totalKcal += diary.meals[i].totals.kcal;
        }
+       return result_diary; 
+    }
+   
+    calculateMacros(diary):Diary{
+        var result_diary = new Diary('', 
+            new Date(),
+            diary.proteinTarget,
+            diary.carbohydratesTarget,
+            diary.kcalTarget, 
+            diary.totalProtein,
+            diary.totalCarbohydrate,
+            diary.totalFat,
+            diary.totalKcal,
+            diary.carbohydratesTargetInGrams,
+            diary.fatTargetInGrams,
+            diary.meals
+        );
+       result_diary.carbohydratesTargetInGrams =  Math.trunc((result_diary.carbohydratesTarget * result_diary.kcalTarget) / (4*100));
+       result_diary.fatTargetInGrams =  Math.trunc((result_diary.kcalTarget - diary.proteinTarget*4 - ((result_diary.carbohydratesTarget * result_diary.kcalTarget) / (100))) / (9));
+       
+       
        return result_diary; 
     }
     

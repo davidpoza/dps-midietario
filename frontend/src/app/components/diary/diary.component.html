@@ -15,22 +15,37 @@
   <div mat-line class="container">
       <div class="row justify-content-center">
           <div class="col-auto macro">P:{{diary.totalProtein}}<br/>{{diary.proteinTarget}}</div>
-          <div class="col-auto macro">C:{{diary.totalCarbohydrate}}</div>
-          <div class="col-auto macro">G:{{diary.totalFat}}</div>
+          <div class="col-auto macro">C:{{diary.totalCarbohydrate}}<br/>{{diary.carbohydratesTargetInGrams}}</div>
+          <div class="col-auto macro">G:{{diary.totalFat}}<br/>{{diary.fatTargetInGrams}}</div>
           <div class="col-auto macro">Cal:{{diary.totalKcal}}<br/>{{diary.kcalTarget}}</div>
       </div>
   </div>
 
   <div class="container">
       <div class="row justify-content-center">
-        <div class="col">                  
-          {{diary.proteinTarget}}<br />
+        <div class="col col-lg-6 ">
+                  
+          <form #changeMacros="ngForm" class="changeMacrosForm">
+            
+            <mat-form-field>
+              <input name="proteinTarget" matInput  placeholder="Proteina (gramos por kilo de peso)" [(ngModel)]="diary.proteinTarget" (input)="recalculate()" required>
+            </mat-form-field>
+  
+            <mat-form-field>
+              <input name="fat" matInput  placeholder="Porcentaje de hidratos" [(ngModel)]="diary.carbohydratesTarget" (input)="recalculate()" required>
+            </mat-form-field>
+  
+           
+  
+            <mat-form-field>
+              <input name="bmr" matInput  placeholder="Calorías objetivo" [(ngModel)]="diary.kcalTarget" required>
+            </mat-form-field>
+  
+            
+          </form>
         </div>
-        <div class="col">                  
-          {{diary.carbohydratesTarget}}<br />
-        </div>
-        
     </div>
+  </div>
 </div>
 
 <div *ngIf="!diary">

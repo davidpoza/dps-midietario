@@ -12,9 +12,11 @@ var UserSchema = Schema({
     age: Number,
     height: Number,
     weight: Number,
+    fat: Number,
     activity_level: Number,
     tmb: Number,
-    image: String,    
+    image: String,
+    formula: Number    
 });
 
 module.exports = mongoose.model('User', UserSchema);

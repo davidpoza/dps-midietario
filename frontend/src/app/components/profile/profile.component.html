@@ -20,8 +20,45 @@
 
           </p>
             
-          <h1>Parámetros</h1>
-          
+          <h3>Parámetros fisiológicos</h3>
+          <mat-form-field>
+            <mat-select [(value)]="selected" placeholder="Sexo">
+              <mat-option value="m">Hombre</mat-option>
+              <mat-option value="f">Mujer</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input name="age" matInput  placeholder="Edad" [(ngModel)]="identity.age" required>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input name="wieght" matInput  placeholder="Peso" [(ngModel)]="identity.weight" required>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input name="height" matInput  placeholder="Altura" [(ngModel)]="identity.height" required>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input name="fat" matInput  placeholder="Porcentaje de grasa" [(ngModel)]="identity.fat" required>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-select name="activity" [(ngModel)]="identity.activity_level" placeholder="Actividad base">
+              <mat-option [value]="0">Inactivo, dormitando</mat-option>
+              <mat-option [value]="1">Sedentario, trabajo de oficina</mat-option>
+              <mat-option [value]="2">Ligero, trabajo con algo de movimiento</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-select name="formula" [(ngModel)]="identity.formula" placeholder="Fórmula para estimación">
+              <mat-option [value]="0">Mifflin St Jeor</mat-option>
+              <mat-option [value]="1">Katch-McArdle</mat-option>
+            </mat-select>
+          </mat-form-field>
+
           <button mat-raised-button color="primary" (click) = "onSave(profileForm)" [disabled]="!profileForm.form.valid" >Guardar</button> 
         </form>
   </div>

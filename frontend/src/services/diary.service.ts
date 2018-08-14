@@ -25,10 +25,18 @@ export class DiaryService{
         return this._http.get(this.url+'diaries/'+date, {headers:headers});
     }
 
+    updateDiary(token, diaryId, update):Observable<any>{
+        let headers = new HttpHeaders().set('Content-Type', 'application/json')
+            .set('Authorization', token);
+        let params = JSON.stringify(update);
+        return this._http.put(this.url+'diaries/'+diaryId, params, {headers:headers});
+    }
+
     //hacemos los calculos de macros respecto de las cantidades indicadas.
     calculateDiary(diary):Diary{
-        var result_diary = new Diary('', 
-            new Date(),
+        var result_diary = new Diary(
+            diary._id, 
+            diary.date,
             diary.proteinTarget,
             diary.carbohydratesTarget,
             diary.kcalTarget, 
@@ -67,8 +75,9 @@ export class DiaryService{
     }
    
     calculateMacros(diary):Diary{
-        var result_diary = new Diary('', 
-            new Date(),
+        var result_diary = new Diary(
+            diary._id, 
+            diary.date,
             diary.proteinTarget,
             diary.carbohydratesTarget,
             diary.kcalTarget, 

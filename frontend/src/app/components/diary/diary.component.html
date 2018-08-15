@@ -14,7 +14,7 @@
   </div>
   <div mat-line class="container">
       <div class="row justify-content-center">
-          <div class="col-auto macro" [class.macro-alert]="diary.totalProtein>diary.proteinTarget">Proteína<br />{{diary.totalProtein}}/{{diary.proteinTarget}}<br />{{diary.proteinTargetInPercentage}}%</div>
+          <div class="col-auto macro" [class.macro-alert]="diary.totalProtein>diary.proteinTarget">Proteínas<br />{{diary.totalProtein}}/{{diary.proteinTarget}}<br />{{diary.proteinTargetInPercentage}}%</div>
           <div class="col-auto macro" [class.macro-alert]="diary.totalCarbohydrate>diary.carbohydratesTargetInGrams">Carb.<br />{{diary.totalCarbohydrate}}/{{diary.carbohydratesTargetInGrams}}<br />{{diary.carbohydratesTarget}}%</div>
           <div class="col-auto macro" [class.macro-alert]="diary.totalFat>diary.fatTargetInGrams">Grasas<br />{{diary.totalFat}}/{{diary.fatTargetInGrams}}<br />{{diary.fatTargetInPercentage}}%</div>
           <div class="col-auto macro" [class.macro-alert]="diary.totalKcal>diary.kcalTarget">Calorías<br />{{diary.totalKcal}}/{{diary.kcalTarget}}</div>
@@ -28,11 +28,11 @@
           <form #changeMacros="ngForm" class="changeMacrosForm">
             
             <mat-form-field>
-              <input name="proteinTarget" matInput  placeholder="Proteina (gramos por kilo de peso)" [(ngModel)]="diary.proteinTarget" (input)="calculateMacros()" required>
+              <input name="proteinTarget" matInput  placeholder="Proteina (gramos)" [(ngModel)]="diary.proteinTarget" (input)="calculateMacros()" required>
             </mat-form-field>
   
             <mat-form-field>
-              <input name="fat" matInput  placeholder="Porcentaje de hidratos" [(ngModel)]="diary.carbohydratesTarget" (input)="calculateMacros()" required>
+              <input name="fat" matInput  placeholder="Hidratos de carbono (porcentaje)" [(ngModel)]="diary.carbohydratesTarget" (input)="calculateMacros()" required>
             </mat-form-field>
   
            

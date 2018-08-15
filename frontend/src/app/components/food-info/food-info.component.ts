@@ -3,6 +3,8 @@ import { Food } from '../../../models/food';
 import { UserService } from '../../../services/user.service';
 import { AppService } from '../../../services/app.service';
 import { FoodService } from '../../../services/food.service';
+import { Global } from '../../../services/global';
+
 import { MatSnackBar } from '@angular/material';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
@@ -21,6 +23,7 @@ export class FoodInfoComponent implements OnInit {
   public foodId;
   public date;
   public meal;
+  public url: String;
 
   constructor(
     private _foodService: FoodService,
@@ -30,6 +33,7 @@ export class FoodInfoComponent implements OnInit {
     private _route: ActivatedRoute,
     private router: Router,
   ) {
+    this.url = Global.url;
     this.token = this._userService.getToken();
     this.identity = this._userService.getIdentity();
     this.food = new Food('','','','', [], 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);

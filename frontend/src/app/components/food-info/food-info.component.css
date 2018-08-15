@@ -1,5 +1,24 @@
+h1{
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    margin-top: 20px;
+}
+
+h2{
+    margin-bottom: 20px;
+    margin-top: 40px;
+}
+
+.image{
+    width: 100%;
+}
+
 .quantity{
+    font-size: 20px;
+    color: rgb(22, 22, 22);
     padding: 20px;
+    border-radius: 5px;
+    background-color: #5ddfc9;
 }
 
 .quantity-label{

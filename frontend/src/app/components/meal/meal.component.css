@@ -3,6 +3,10 @@
     padding: 10px;
     background-color: rgb(58, 58, 58);
     margin-bottom: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
 }
 
 .meal h2{
@@ -12,6 +16,8 @@
     margin: -10px;
     margin-bottom: 10px;
     text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .food{

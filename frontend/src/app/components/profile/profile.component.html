@@ -15,7 +15,7 @@
           
 
           <p>
-            Imagen<br />
+            Avatar<br />
             <input type="file" name="image" placeholder="imagen" (change)="fileChangeEvent($event)">
 
           </p>
@@ -51,7 +51,7 @@
           </mat-form-field>
 
           <mat-form-field>
-            <input name="fat" matInput  placeholder="Porcentaje de grasa" [(ngModel)]="identity.fat" (input)="calculateBMR()" required>
+            <input name="fat" matInput  placeholder="Porcentaje de grasa" [(ngModel)]="identity.fat" (input)="calculateBMR()" >
           </mat-form-field>
 
           <mat-form-field>

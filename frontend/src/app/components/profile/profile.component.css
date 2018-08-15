@@ -1,7 +1,7 @@
 .profileForm{
     
     padding: 10px;
-    margin-top: 20%;
+    margin-top: 5%;
 }
 
 .profileForm > *{
@@ -10,4 +10,9 @@
 
 .profileForm h1{
     margin-bottom: 30px;
+}
+
+h3{
+    margin-top: 40px;
+    margin-bottom: 20px;
 }

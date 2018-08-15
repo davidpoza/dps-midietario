@@ -6,7 +6,7 @@
           <a *ngIf="!identity" mat-list-item [routerLink]="['/login']" (click)="sidenav.toggle()">Login</a>
           <a *ngIf="identity" mat-list-item>Hola {{identity.name}}!</a>
           <a *ngIf="identity" [routerLink]="['/profile']" [routerLinkActive]="['actived']" mat-list-item (click)="sidenav.toggle()"><mat-icon mat-list-icon>face</mat-icon>Perfil</a>
-          <a *ngIf="identity" [routerLink]="['/']" [routerLinkActive]="['actived']" mat-list-item (click)="sidenav.toggle()"><mat-icon mat-list-icon>calendar_today</mat-icon>Diario</a>
+          <a *ngIf="identity" [routerLink]="['/']" [routerLinkActive]="['actived']" mat-list-item (click)="sidenav.toggle()"><mat-icon mat-list-icon>date_range</mat-icon>Diario</a>
           <a *ngIf="identity" [routerLink]="['/foods']" [routerLinkActive]="['actived']" mat-list-item (click)="sidenav.toggle()"><mat-icon mat-list-icon>fastfood</mat-icon>Ver alimentos</a>         
           <a *ngIf="identity" [routerLink]="['/shoppingcart']" mat-list-item (click)="sidenav.toggle()"><mat-icon mat-list-icon>list_alt</mat-icon>Recetas</a>
           <a *ngIf="identity" mat-list-item (click)="logout()" (click)="sidenav.toggle()"><mat-icon mat-list-icon>exit_to_app</mat-icon>Cerrar sesión</a>

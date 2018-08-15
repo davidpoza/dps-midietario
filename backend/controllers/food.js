@@ -6,6 +6,7 @@ var User = require('../models/user')
 
 var fs = require('fs');
 var path = require('path');
+const sharp = require('sharp');
 var config = require('../config');
 
 var mongoosePaginate = require('mongoose-pagination');
@@ -218,17 +219,28 @@ var controller = {
             //var fileSplit = filePath.split("/");
             var fileSplit = filePath.split("\\");
             var fileName = fileSplit[1];
-            Food.findByIdAndUpdate(foodId, {image: fileName},{new:true}, (err, foodUpdated) => {
-                if(err) return res.status(500).send({message: 'La imagen no se ha subido.'});
-                if(!foodUpdated) return res.status(404).send({message: 'El alimento no existe.'});
-                return res.status(200).send({
-                    item: foodUpdated
-                });
+
+            //redimensionamos la imagen
+            sharp(req.files.image.path)
+            .resize(1024) //1024px
+            .toBuffer()
+            .then( data => {
+                fs.writeFileSync(req.files.image.path, data);
+                Food.findByIdAndUpdate(foodId, {image: fileName},{new:true}, (err, foodUpdated) => {
+                    if(err) return res.status(500).send({message: 'La imagen no se ha subido.'});
+                    if(!foodUpdated) return res.status(404).send({message: 'El alimento no existe.'});
+                    return res.status(200).send({
+                        item: foodUpdated
+                    });
+                })
             })
+            .catch( err => {
+                console.log(err);
+            });            
         }
         else{
             return res.status(500).send({
-                massage: fileName
+                message: fileName
             });
         }
     },

@@ -210,7 +210,7 @@ var controller = {
     */
     /*la imagen se sube con el middleware multiparty*/
     uploadImage: function(req,res){
-        var itemId = req.params.id;
+        var foodId = req.params.id;
         var fileName = "Imagen no subida";
 
         if(req.files){
@@ -218,11 +218,11 @@ var controller = {
             //var fileSplit = filePath.split("/");
             var fileSplit = filePath.split("\\");
             var fileName = fileSplit[1];
-            Item.findByIdAndUpdate(itemId, {image: fileName},{new:true}, (err, itemUpdated) => {
+            Food.findByIdAndUpdate(foodId, {image: fileName},{new:true}, (err, foodUpdated) => {
                 if(err) return res.status(500).send({message: 'La imagen no se ha subido.'});
-                if(!itemUpdated) return res.status(404).send({message: 'El item no existe.'});
+                if(!foodUpdated) return res.status(404).send({message: 'El alimento no existe.'});
                 return res.status(200).send({
-                    item: itemUpdated
+                    item: foodUpdated
                 });
             })
         }
@@ -231,6 +231,22 @@ var controller = {
                 massage: fileName
             });
         }
+    },
+
+    getImage: function(req, res){
+        var file = req.params.file;
+        var filepath = './uploads/'+file;
+        
+        fs.exists(filepath, (exists) => {
+            if(exists){
+                return res.sendFile(path.resolve(filepath));
+            }
+            else{
+                return res.status(200).send({
+                    message: 'No existe la imagen'
+                })
+            }
+        })
     },
     /*
     getImage: function(req, res){

@@ -17,6 +17,9 @@ router.get('/foods/:id', /*md_auth.ensureAuth,*/ FoodController.getFood);
 router.put('/foods/:id', /*md_auth.ensureAuth,*/ FoodController.updateFood);
 router.delete('/foods/:id', /*md_auth.ensureAuth,*/ FoodController.deleteFood);
 router.post('/deletefoodfromdiary', /*md_auth.ensureAuth,*/ FoodController.deleteFoodFromDiary);
+router.post('/uploadfoodimage/:id', md_auth.ensureAuth, multipartMiddleware, FoodController.uploadImage);
+router.get('/getfoodimage/:file', multipartMiddleware, FoodController.getImage);
+
 /*router.get('/listitems/:id', md_auth.ensureAuth, ItemController.getListItems);
 router.get('/items/:id', md_auth.ensureAuth, ItemController.getItem);
 router.put('/items/:id', md_auth.ensureAuth, ItemController.updateItem);

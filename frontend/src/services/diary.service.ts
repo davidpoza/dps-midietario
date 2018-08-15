@@ -77,6 +77,12 @@ export class DiaryService{
             result_diary.totalCarbohydrate += diary.meals[i].totals.carbohydrates;
             result_diary.totalFat += diary.meals[i].totals.fat;
             result_diary.totalKcal += diary.meals[i].totals.kcal;
+
+            //truncamos los totales
+            result_diary.totalProtein = Math.trunc(result_diary.totalProtein);
+            result_diary.totalCarbohydrate = Math.trunc(result_diary.totalCarbohydrate);
+            result_diary.totalFat = Math.trunc(result_diary.totalFat);
+            result_diary.totalKcal = Math.trunc(result_diary.totalKcal);
        }
        return result_diary; 
     }

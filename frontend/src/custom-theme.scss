@@ -1,0 +1,79 @@
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+
+$mat-verde: (
+    50 : #ecfbf9,
+    100 : #cef5ef,
+    200 : #aeefe4,
+    300 : #8ee9d9,
+    400 : #75e4d1,
+    500 : #5ddfc9,
+    600 : #55dbc3,
+    700 : #4bd7bc,
+    800 : #41d2b5,
+    900 : #30caa9,
+    A100 : #ffffff,
+    A200 : #dbfff7,
+    A400 : #a8ffeb,
+    A700 : #8fffe5,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
+        800 : #000000,
+        900 : #000000,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$mat-gris: (
+    50 : #eaeaeb,
+    100 : #cbcbcd,
+    200 : #a9a8ac,
+    300 : #86858b,
+    400 : #6c6b72,
+    500 : #525159,
+    600 : #4b4a51,
+    700 : #414048,
+    800 : #38373e,
+    900 : #28272e,
+    A100 : #9682f9,
+    A200 : #6d52f7,
+    A400 : #3d16ff,
+    A700 : #2a00fc,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #ffffff,
+        A400 : #ffffff,
+        A700 : #ffffff,
+    )
+);
+
+// Define a theme.
+$primary: mat-palette($mat-verde);
+$accent:  mat-palette($mat-gris, A200, A100, A400);
+
+$theme: mat-light-theme($primary, $accent);
+
+// Include all theme styles for the components.
+@include angular-material-theme($theme);

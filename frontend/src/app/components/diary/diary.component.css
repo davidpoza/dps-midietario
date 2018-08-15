@@ -3,7 +3,7 @@
     
  }
  
- .macro{
+ .macro, .macro-alert{
      font-size: 18px;
      color: rgb(22, 22, 22);
      background-color: #5ddfc9;
@@ -14,6 +14,10 @@
      width: 110px;
      border-radius: 10px;
  }
+
+.macro-alert{
+    background-color: #df775d;
+}
 
  .changeMacrosForm{    
     padding: 10px;

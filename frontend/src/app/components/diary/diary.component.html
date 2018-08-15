@@ -14,10 +14,10 @@
   </div>
   <div mat-line class="container">
       <div class="row justify-content-center">
-          <div class="col-auto macro">Proteína<br />{{diary.totalProtein}}/{{diary.proteinTarget}}<br />{{diary.proteinTargetInPercentage}}%</div>
-          <div class="col-auto macro">Carb.<br />{{diary.totalCarbohydrate}}/{{diary.carbohydratesTargetInGrams}}<br />{{diary.carbohydratesTarget}}%</div>
-          <div class="col-auto macro">Grasas<br />{{diary.totalFat}}/{{diary.fatTargetInGrams}}<br />{{diary.fatTargetInPercentage}}%</div>
-          <div class="col-auto macro">Calorías<br />{{diary.totalKcal}}/{{diary.kcalTarget}}</div>
+          <div class="col-auto macro" [class.macro-alert]="diary.totalProtein>diary.proteinTarget">Proteína<br />{{diary.totalProtein}}/{{diary.proteinTarget}}<br />{{diary.proteinTargetInPercentage}}%</div>
+          <div class="col-auto macro" [class.macro-alert]="diary.totalCarbohydrate>diary.carbohydratesTargetInGrams">Carb.<br />{{diary.totalCarbohydrate}}/{{diary.carbohydratesTargetInGrams}}<br />{{diary.carbohydratesTarget}}%</div>
+          <div class="col-auto macro" [class.macro-alert]="diary.totalFat>diary.fatTargetInGrams">Grasas<br />{{diary.totalFat}}/{{diary.fatTargetInGrams}}<br />{{diary.fatTargetInPercentage}}%</div>
+          <div class="col-auto macro" [class.macro-alert]="diary.totalKcal>diary.kcalTarget">Calorías<br />{{diary.totalKcal}}/{{diary.kcalTarget}}</div>
       </div>
   </div>
 

@@ -1,6 +1,7 @@
 'use strict'
 var Diary = require('../models/diary')
 var Meal = require('../models/meal')
+var User = require('../models/user')
 var fs = require('fs');
 var path = require('path');
 var config = require('../config');
@@ -14,20 +15,29 @@ var controller = {
         var params = req.body;
         var date = params.date;
 
-        diary.date = new Date(date);
+        User.findOne({_id: req.user.sub}).exec((err, user) => {
+            if(err) return res.status(500).send({message: 'Error al consultar usuario'});
+            if(!user) return res.status(404).send({message: 'No existe el usuario.'});
+            
+            diary = new Diary();
+            diary.proteinTarget = 1*user.weight; // por defecto ponemos 1g por kilo de peso
+            diary.carbohydratesTarget = 50; // por defecto ponemos 50% de carbohidratos
+            diary.kcalTarget = user.bmr; //por defecto ponemos calorias de mantenimiento
+            diary.date = new Date(date);
+            diary.meals = Array();
 
-        diary.meals = Array();
-
-        for(var i=0;i<config.mealsnumber;i++){
-            var meal = new Meal()
-            meal.name = config.meals[i];
-            diary.meals.push(meal);
-        }
-        
-        diary.save((err, diaryStored) => {
-            if(err) return res.status(500).send({message: 'Error al guardar diario.'});
-            if(!diaryStored) return res.status(404).send({message: 'No se ha podido guardar el diario.'});
-            return res.status(200).send({diary: diaryStored});    
+            for(var i=0;i<config.mealsnumber;i++){
+                var meal = new Meal.Meal()
+                meal.name = config.meals[i];
+                diary.meals.push(meal);
+            }
+            
+            diary.save((err, diaryStored) => {
+                if(err) return res.status(500).send({message: 'Error al guardar diario.'});
+                if(!diaryStored) return res.status(404).send({message: 'No se ha podido guardar el diario.'});
+                return res.status(200).send({diary: diaryStored});    
+            })
+           
         })
     },        
 

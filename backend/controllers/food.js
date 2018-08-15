@@ -67,33 +67,7 @@ var controller = {
             
             if(err) return res.status(500).send({message: 'Error al devolver diario.'});
             if(!diary) {
-                //consultamos las macros que tiene definidas el usuario req.user.sub
-                User.findOne({_id: req.user.sub}).exec((err, user) => {
-                    if(err) return res.status(500).send({message: 'Error al consultar usuario'});
-                    if(!user) return res.status(404).send({message: 'No existe el usuario.'});
-                    
-                    //no existe el diario asi que lo creamos
-                    diary = new Diary();
-                    diary.proteinTarget = 1*user.weight; // por defecto ponemos 1g por kilo de peso
-                    diary.carbohydratesTarget = 50; // por defecto ponemos 50% de carbohidratos
-                    diary.kcalTarget = user.bmr; //por defecto ponemos calorias de mantenimiento
-                    diary.date = diaryDate;
-                    diary.meals = Array();
-
-                    for(var i=0;i<config.mealsnumber;i++){
-                        var meal = new Meal.Meal()
-                        meal.name = config.meals[i];
-                        diary.meals.push(meal);
-                    }
-                    
-                    diary.save((err, diaryStored) => {
-                        if(err) return res.status(500).send({message: 'Error al guardar diario.'});
-                        if(!diaryStored) return res.status(404).send({message: 'No se ha podido guardar el diario.'});
-                        
-                        controller.insertFoodInMeal(req, res, diary, foodId, mealIndex, quantity);
-                    })
-                   
-                }) 
+                return res.status(404).send({message: 'El diario no existe.'});
             }
             else{ //si el diario existe                
                 controller.insertFoodInMeal(req, res, diary, foodId, mealIndex, quantity);  

@@ -3,10 +3,12 @@ import { Food } from '../../../models/food';
 import { UserService } from '../../../services/user.service';
 import { AppService } from '../../../services/app.service';
 import { FoodService } from '../../../services/food.service';
+
 import { MatSnackBar } from '@angular/material';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-foods',
@@ -30,7 +32,8 @@ export class FoodsComponent implements OnInit {
     public dialog: MatDialog,
     public snackBar: MatSnackBar,
     private _route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private location: Location
   ) {
     this.token = this._userService.getToken();
     this.identity = this._userService.getIdentity();
@@ -44,6 +47,7 @@ export class FoodsComponent implements OnInit {
 
   ngOnInit() {
     this._appService.setTitle("Alimentos");
+    this._appService.setShowMenu(false);
     this.getFoods();
   }
 
@@ -100,4 +104,7 @@ export class FoodsComponent implements OnInit {
     this.foods = this.foods.filter(food => food.name.toLowerCase().includes(<string>this.search.toLowerCase()));     
   }
 
+  goBack() {
+    this.location.back();
+  }
 }

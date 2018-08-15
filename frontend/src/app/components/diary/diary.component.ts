@@ -59,7 +59,7 @@ export class DiaryComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._appService.setTitle("Diario de comidas");
+    this._appService.setTitle("Diario");
     this.getDiary()
 
   }

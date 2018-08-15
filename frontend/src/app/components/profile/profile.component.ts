@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../../services/user.service';
+import { AppService } from '../../../services/app.service';
 import { Global } from '../../../services/global';
 
 import { MatSnackBar } from '@angular/material';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Location } from '@angular/common';
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -16,8 +19,10 @@ export class ProfileComponent implements OnInit {
   public filesToUpload: Array<File>;
   constructor(
     private _userService: UserService,
+    private _appService: AppService,
     public snackBar: MatSnackBar,
     private _router: Router,
+    private location: Location
   ) {
     this.url = Global.url;
     this.token = this._userService.getToken();
@@ -25,6 +30,8 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
+    this._appService.setShowMenu(false);
+    this._appService.setTitle("");
   }
 
   onSave(form){
@@ -62,5 +69,9 @@ export class ProfileComponent implements OnInit {
 
   fileChangeEvent(fileInput: any){
     this.filesToUpload = <Array<File>>fileInput.target.files;
+  }
+
+  goBack() {
+    this.location.back();
   }
 }

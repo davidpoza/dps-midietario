@@ -1,8 +1,8 @@
-
+<img class="image" *ngIf="food.image" src="{{url+'getfoodimage/'+food.image}}"  />
 <div class="container">
     <div class="row justify-content-center">
       <div class="col col-lg-6 ">
-        <img class="image" *ngIf="food.image" src="{{url+'getfoodimage/'+food.image}}"  />        
+                
         <form #addFoodForm="ngForm" class="addfood">
           <h1>{{food.name}}</h1>
           <div class="quantity">

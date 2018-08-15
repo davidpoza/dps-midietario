@@ -9,10 +9,23 @@ h2{
     margin-top: 40px;
 }
 
-.image{
-    width: 100%;
+@media (max-width: 600px) { /*movil*/
+    .image{
+        width: 100%;
+        margin-top: -10px;
+        object-fit: cover;
+        height:300px;
+    }
 }
 
+@media (min-width: 601px) { /*movil*/
+    .image{
+        width: 100%;
+        margin-top: -10px;
+        object-fit: cover;
+        height:400px;
+    }
+}
 .quantity{
     font-size: 20px;
     color: rgb(22, 22, 22);

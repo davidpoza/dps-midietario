@@ -32,6 +32,13 @@ export class DiaryService{
         return this._http.put(this.url+'diaries/'+diaryId, params, {headers:headers});
     }
 
+    createDiary(token, diary):Observable<any>{
+        let headers = new HttpHeaders().set('Content-Type', 'application/json')
+            .set('Authorization', token);
+        let params = JSON.stringify(diary);
+        return this._http.post(this.url+'diaries/', params, {headers:headers});
+    }
+
     //hacemos los calculos de macros respecto de las cantidades indicadas.
     calculateDiary(diary):Diary{
         var result_diary = new Diary(

@@ -49,5 +49,8 @@
 </div>
 
 <div *ngIf="!diary">
-    No hay entradas en esta fecha
+  <div class="empty">              
+    <p>No hay entradas en esta fecha</p>
+    <button mat-button (click)="createDiary(dateString)">Crear diario para este día {{dateString}}</button>
+  </div>
 </div>

@@ -115,5 +115,20 @@ export class DiaryComponent implements OnInit {
       }
     );
   }
+
+  createDiary(date){
+    var dateString = moment(this.date.toDateString()).format("YYYY-MM-DD");
+    var diary = { date: dateString };
+    this._diaryService.createDiary(this.token, diary).subscribe(
+      response =>{
+        this.getDiary();
+        this.calculateMacros();
+      },
+      error => {
+        this.diary = null;
+        console.log();
+      }
+    );
+  }
 }
  

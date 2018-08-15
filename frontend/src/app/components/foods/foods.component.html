@@ -1,4 +1,8 @@
 <mat-list>
+  <div class="search">
+    <mat-icon>search</mat-icon>
+    <input matInput placeholder="Buscar" (input)="onSearch()" [(ngModel)]="search"/>
+  </div>
   <div *ngFor="let food of foods; let i = index" class="item">
   <mat-list-item  >
       <mat-icon mat-list-icon (click)="onClick(food._id, date, meal)">folder</mat-icon>

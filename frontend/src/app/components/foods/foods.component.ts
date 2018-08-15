@@ -16,10 +16,12 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 })
 export class FoodsComponent implements OnInit {
   public foods: Array<Food>;
+  public foods_copy: Array<Food>;
   public token;
   public identity;
   public date;
   public meal;
+  public search: String;
 
   constructor(
     private _foodService: FoodService,
@@ -49,6 +51,7 @@ export class FoodsComponent implements OnInit {
     this._foodService.getFoods(this.token).subscribe(
       response =>{
         this.foods = response.foods;
+        this.foods_copy = this.foods.slice(); //hacemos una copia
         console.log(this.foods);
       },
       error => {
@@ -90,6 +93,11 @@ export class FoodsComponent implements OnInit {
     // en caso contrario, mostramos vista que solo da información
     else
       this.router.navigate(['/food', food]);
+  }
+
+  onSearch(){
+    this.foods = this.foods_copy.slice(); //recuperamos siempre una copia de la lista completa
+    this.foods = this.foods.filter(food => food.name.toLowerCase().includes(<string>this.search.toLowerCase()));     
   }
 
 }

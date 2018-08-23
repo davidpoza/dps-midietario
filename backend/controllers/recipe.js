@@ -62,6 +62,15 @@ var controller = {
         })
     },
 
+    getRecipes: function(req,res){
+        var recipeId = req.params.id;
+
+        Recipe.find().exec((err, recipes) => {
+            if(err) return res.status(500).send({message: 'Error al devolver recetas.'});
+            if(!recipes) return res.status(404).send({message: 'No existen recetas.'});
+            return res.status(200).send({recipes});
+        })
+    },
 
     getRecipe: function(req,res){
         var recipeId = req.params.id;
@@ -82,6 +91,41 @@ var controller = {
             if(!recipeUpdated) return res.status(404).send({message: 'No existe la receta a actualizar'});
             return res.status(200).send({recipe: recipeUpdated})
         });  
+    },
+
+    deleteIngredientFromRecipe: function(req,res){
+        var params = req.body;       
+        var foodId = params.food;
+        var mealIndex = params.meal; // el indice del array de meals donde vamos a borrar
+        //obtenemos el diario a partir de la fecha
+        var diaryDate = new Date(params.date);
+        if(!foodId) return res.status(404).send({message: 'No ha indicado alimento a borrar'});
+        if(!diaryDate) return res.status(404).send({message: 'No ha indicado diario'});
+        if(mealIndex==='') return res.status(404).send({message: 'No ha indicado meal'});
+
+        Diary.findOne({date:diaryDate}).exec((err, diary) => {
+            if(err) return res.status(500).send({message: 'Error al seleccionar diario.'});
+            if(!diary) return res.status(404).send({message: 'No existe el diario.'});
+            
+            // borramos el id del alimento correcto   
+            console.log(diary.meals[mealIndex].foods.length);         
+            for (let i = 0; i < diary.meals[mealIndex].foods.length; i++) {  
+                if(diary.meals[mealIndex].foods[i].refFood == foodId){                    
+                    diary.meals[mealIndex].foods.splice(i, 1);   
+                    console.log("borramos comida del diario");
+                }
+                            
+            }
+  
+            // actualizamos el diario
+            Diary.findByIdAndUpdate(diary._id, diary, {new:true}, (err, diaryUpdated) => {
+                if(err) return res.status(500).send({message: 'Error al actualizar diario.'});
+                if(!diaryUpdated) return res.status(404).send({message: 'No existe el diario a actualizar'});
+                return res.status(200).send({diary: diaryUpdated})
+            });  
+        });
+
+        
     },
 }
 

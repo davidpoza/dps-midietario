@@ -1,0 +1,29 @@
+<mat-list>
+  <div class="search">
+    <mat-icon>search</mat-icon>
+    <input matInput placeholder="Buscar" (input)="onSearch()" [(ngModel)]="search"/>
+  </div>
+  <div *ngFor="let recipe of recipes; let i = index" class="item">
+  <mat-list-item  >
+      <mat-icon mat-list-icon (click)="onClick(food._id, date, meal)">label</mat-icon>
+      <h4 mat-line (click)="onClick(food._id, date, meal)">{{recipe.name}}</h4>
+      <div mat-line class="container">
+          <div class="row">
+
+              <div class="col">P:{{recipe.totalProtein}}</div>
+              <div class="col">C:{{recipe.totalCarbohydrates}}</div>
+              <div class="col">G:{{recipe.totalFat}}</div>
+              <div class="col">Cal:{{recipe.totalKcal}}</div>
+          </div>
+      </div>
+      
+      <button mat-icon-button color="primary" (click)="deleteList(food._id,i)">
+          <mat-icon>delete</mat-icon>
+      </button>&nbsp;
+      
+  </mat-list-item>
+</div>
+</mat-list>
+<button mat-fab color="primary" class="floating-button" [routerLink]="['/addfood']">
+  <mat-icon>add</mat-icon>
+</button>

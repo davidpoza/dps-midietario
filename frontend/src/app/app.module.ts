@@ -27,6 +27,7 @@ import { AddFoodFormComponent } from './components/add-food-form/add-food-form.c
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 import { FoodInfoComponent } from './components/food-info/food-info.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { RecipesComponent } from './components/recipes/recipes.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { ProfileComponent } from './components/profile/profile.component';
     ConfirmationDialogComponent,
     FoodInfoComponent,
     ProfileComponent,
+    RecipesComponent,
   ],
   imports: [
     BrowserModule,

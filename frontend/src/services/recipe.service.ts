@@ -21,6 +21,13 @@ export class RecipeService{
         return this._http.get(this.url+'recipes/', {headers:headers});
     }
 
+    getRecipe(token, recipeId):Observable<any>{
+        let headers = new HttpHeaders().set('Content-Type', 'application/json')
+            .set('Authorization', token);
+        
+        return this._http.get(this.url+'recipes/'+recipeId, {headers:headers});
+    }
+
     updateDiary(token, diaryId, update):Observable<any>{
         let headers = new HttpHeaders().set('Content-Type', 'application/json')
             .set('Authorization', token);

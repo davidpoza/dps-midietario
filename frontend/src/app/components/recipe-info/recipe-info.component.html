@@ -1,0 +1,44 @@
+<img class="image" *ngIf="recipe.image" src="{{url+'getfoodimage/'+recipe.image}}"  />
+<div class="container">
+    <div class="row justify-content-center">
+      <div class="col col-lg-6 ">
+                
+        <form #addFoodForm="ngForm" class="addfood">
+          <h1>{{recipe.name}}</h1>
+          <div class="quantity">
+          <label class="quantity-label">Cantidad</label>
+          <div class="quantity-input"><input  name="cantidad" type="Number" (input)="onInput()" [(ngModel)]="quantity">
+          GRAMO(S)</div>
+          </div>
+          <h2>Ingredientes</h2>
+          <div *ngFor="let ingredient of recipe.ingredients">
+              <h5>{{ingredient.refFood.name | uppercase}}<span class="ingredient_quantity">{{ingredient.quantity}}g.</span></h5>
+          </div>
+          <h2>Información nutricional</h2>
+          <div class="nutrient-container container">
+            <div class="row justify-content-center">
+                <div class="nutrient col">
+                    Proteínas<br /><span class="value">{{calculatedFood.protein | number : '1.2-2'}}g.</span>
+                </div>
+                <div class="nutrient col">
+                    Carb.<br /><span class="value">{{calculatedFood.carbohydrates | number : '1.2-2'}}g.</span>
+                </div>
+                <div class="nutrient col">
+                    Grasas<br /><span class="value">{{calculatedFood.fat | number : '1.2-2'}}g.</span>
+                </div>
+                <div class="nutrient col">
+                    Fibra.<br /><span class="value">{{calculatedFood.fiber | number : '1.2-2'}}g.</span>
+                </div>
+                <div class="nutrient col">
+                    Sodio.<br /><span class="value">{{calculatedFood.sodium | number : '1.2-2'}}g.</span>
+                </div>
+                <div class="nutrient col">
+                    Calorías.<br /><span class="value">{{calculatedFood.kcal | number : '1.0-0'}}kcal.</span>
+                </div>
+            </div>
+          </div>
+
+          <button *ngIf="date" mat-raised-button color="primary" (click)="addFoodToDiary()">Añadir</button>
+        </form>
+  </div>
+  </div>

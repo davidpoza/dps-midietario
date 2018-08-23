@@ -9,6 +9,7 @@ import { AddFoodFormComponent } from './components/add-food-form/add-food-form.c
 import { FoodInfoComponent } from './components/food-info/food-info.component';
 import { RegisterUserFormComponent } from './components/register-user-form/register-user-form.component';
 import { RecipesComponent } from './components/recipes/recipes.component';
+import { RecipeInfoComponent } from './components/recipe-info/recipe-info.component';
 
 const appRoutes: Routes = [
     { path: '', component: DiaryComponent},
@@ -22,6 +23,7 @@ const appRoutes: Routes = [
     { path: 'login', component: LoginComponent},
     { path: 'register', component: RegisterUserFormComponent},
     { path: 'recipes', component: RecipesComponent},
+    { path: 'recipes/:id', component: RecipeInfoComponent},
 ];
 
 export const appRoutingProviders: any[] = [];

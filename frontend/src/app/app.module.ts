@@ -28,6 +28,7 @@ import { ConfirmationDialogComponent } from './components/confirmation-dialog/co
 import { FoodInfoComponent } from './components/food-info/food-info.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { RecipesComponent } from './components/recipes/recipes.component';
+import { RecipeInfoComponent } from './components/recipe-info/recipe-info.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { RecipesComponent } from './components/recipes/recipes.component';
     FoodInfoComponent,
     ProfileComponent,
     RecipesComponent,
+    RecipeInfoComponent,
   ],
   imports: [
     BrowserModule,

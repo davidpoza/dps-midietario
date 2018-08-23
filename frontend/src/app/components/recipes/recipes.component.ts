@@ -30,12 +30,13 @@ export class RecipesComponent implements OnInit {
   ) {
     this.token = this._userService.getToken();
     this.identity = this._userService.getIdentity();
-
+    this._appService.setShowMenu(false);
+    this._appService.setTitle("Recetas");
    }
 
   ngOnInit() {
-    this._appService.setTitle("Recetas");
-    this._appService.setShowMenu(false);
+    
+    
     this.getRecipes();
   }
 

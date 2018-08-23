@@ -5,8 +5,8 @@
   </div>
   <div *ngFor="let recipe of recipes; let i = index" class="item">
   <mat-list-item  >
-      <mat-icon mat-list-icon (click)="onClick(food._id, date, meal)">label</mat-icon>
-      <h4 mat-line (click)="onClick(food._id, date, meal)">{{recipe.name}}</h4>
+      <mat-icon mat-list-icon [routerLink]="['/recipes/', recipe._id]">label</mat-icon>
+      <h4 mat-line [routerLink]="['/recipes', recipe._id]">{{recipe.name}}</h4>
       <div mat-line class="container">
           <div class="row">
 

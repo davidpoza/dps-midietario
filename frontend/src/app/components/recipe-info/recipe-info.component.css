@@ -1,0 +1,69 @@
+h1{
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    margin-top: 20px;
+}
+
+h2{
+    margin-bottom: 20px;
+    margin-top: 40px;
+}
+
+@media (max-width: 600px) { /*movil*/
+    .image{
+        width: 100%;
+        margin-top: -10px;
+        object-fit: cover;
+        height:300px;
+    }
+}
+
+@media (min-width: 601px) { /*movil*/
+    .image{
+        width: 100%;
+        margin-top: -10px;
+        object-fit: cover;
+        height:400px;
+    }
+}
+.quantity{
+    font-size: 20px;
+    color: rgb(22, 22, 22);
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #5ddfc9;
+}
+
+.quantity-label{
+  
+
+}
+
+.quantity-input{
+    float: right
+}
+
+.nutrient-container{
+    margin-bottom: 20px;
+}
+
+.nutrient{
+    color: white;
+    border-radius: 5px;
+    background-color: rgb(22, 22, 22);
+    margin: 10px;
+    text-align: center;
+}
+
+.nutrient .value{
+    color: #5ddfc9;
+}
+
+button {
+    width: 100%;
+}
+
+.ingredient_quantity{
+    color: #5ddfc9;
+    float: right;
+}

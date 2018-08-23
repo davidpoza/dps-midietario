@@ -9,7 +9,7 @@ var app = express();
 var food_routes = require('./routes/food');
 var user_routes = require('./routes/user');
 var diary_routes = require('./routes/diary');
-
+var recipe_routes = require('./routes/recipe');
 
 //middlewares
 //para que todo lo que llegue por body lo convierta a un objeto json
@@ -31,6 +31,6 @@ app.use((req, res, next) => {
 app.use('/api', food_routes);
 app.use('/api', user_routes);
 app.use('/api', diary_routes);
-
+app.use('/api', recipe_routes);
 
 module.exports = app;

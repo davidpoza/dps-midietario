@@ -74,13 +74,13 @@ var controller = {
     },
 
     updateRecipe: function(req,res){
-        var diaryId = req.params.id;
+        var recipeId = req.params.id;
         var update = req.body;
         
-        Diary.findByIdAndUpdate(diaryId, update, {new:true}, (err, diaryUpdated) => {
-            if(err) return res.status(500).send({message: 'Error al actualizar diario.'});
-            if(!diaryUpdated) return res.status(404).send({message: 'No existe el diario a actualizar'});
-            return res.status(200).send({item: diaryUpdated})
+        Recipe.findByIdAndUpdate(recipeId, update, {new:true}, (err, recipeUpdated) => {
+            if(err) return res.status(500).send({message: 'Error al actualizar receta.'});
+            if(!recipeUpdated) return res.status(404).send({message: 'No existe la receta a actualizar'});
+            return res.status(200).send({recipe: recipeUpdated})
         });  
     },
 }

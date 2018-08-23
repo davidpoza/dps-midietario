@@ -13,4 +13,5 @@ var md_auth = require('../middleware/authenticated');
 router.post('/recipes', /*md_auth.ensureAuth,*/ RecipeController.addRecipe);
 router.post('/addingredienttorecipe', /*md_auth.ensureAuth,*/ RecipeController.addIngredientToRecipe);
 router.get('/recipes/:id', /*md_auth.ensureAuth,*/ RecipeController.getRecipe);
+router.put('/recipes/:id', /*md_auth.ensureAuth,*/ RecipeController.updateRecipe);
 module.exports = router;

@@ -32,6 +32,7 @@ h2{
     padding: 20px;
     border-radius: 5px;
     background-color: #5ddfc9;
+    margin-top: 40px;
 }
 
 .quantity-label{
@@ -66,4 +67,11 @@ button {
 .ingredient_quantity{
     color: #5ddfc9;
     float: right;
+}
+
+.ingredient{
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 5px;
+    margin-bottom: 10px;
 }

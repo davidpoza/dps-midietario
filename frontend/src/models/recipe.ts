@@ -5,10 +5,13 @@ export class Recipe{
         public description: string,
         public image: string,
         public ingredients: Array<any>,
-        public totalProtein: number, //suma total
-        public totalCarbohydrate: number, //suma total
-        public totalFat: number, //suma total
-        public totalKcal: number, //suma total
+        public protein: number, //suma total
+        public carbohydrates: number, //suma total
+        public fat: number, //suma total
+        public kcal: number, //suma total
+        public sodium: number, //suma total
+        public fiber: number, //suma total
+        public quantity: number //peso total de la receta
     ){
 
     }

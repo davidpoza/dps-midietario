@@ -34,7 +34,7 @@ export class RecipeInfoComponent implements OnInit {
     this.token = this._userService.getToken();
     this.identity = this._userService.getIdentity();
     this.quantity = 100;
-    this.recipe = new Recipe('','','','',[],0,0,0,0);
+    this.recipe = new Recipe('','','','',[],0,0,0,0,0,0,0);
     this._appService.setShowMenu(false);
     this._appService.setTitle("");
     this._route.params.subscribe(params => {
@@ -50,6 +50,8 @@ export class RecipeInfoComponent implements OnInit {
     this._recipeService.getRecipe(this.token,id).subscribe(
       response =>{
         this.recipe = response.recipe;
+        this.recipe = this._recipeService.calculateMacros(this.recipe, this.quantity);
+        console.log(this.recipe);
       },
       error => {
         console.log();
@@ -57,4 +59,8 @@ export class RecipeInfoComponent implements OnInit {
     );
   }
 
+
+  onInput(){
+    this.recipe = this._recipeService.calculateMacros(this.recipe, this.quantity);
+  }
 }

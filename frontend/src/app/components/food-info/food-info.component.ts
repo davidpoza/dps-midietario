@@ -3,6 +3,7 @@ import { Food } from '../../../models/food';
 import { UserService } from '../../../services/user.service';
 import { AppService } from '../../../services/app.service';
 import { FoodService } from '../../../services/food.service';
+import { RecipeService } from '../../../services/recipe.service';
 import { Global } from '../../../services/global';
 
 import { MatSnackBar } from '@angular/material';
@@ -12,7 +13,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
   selector: 'app-food-info',
   templateUrl: './food-info.component.html',
   styleUrls: ['./food-info.component.css'],
-  providers: [FoodService]
+  providers: [FoodService, RecipeService]
 })
 export class FoodInfoComponent implements OnInit {
   public food: Food;
@@ -23,11 +24,13 @@ export class FoodInfoComponent implements OnInit {
   public foodId;
   public date;
   public meal;
+  public recipe;
   public url: String;
 
   constructor(
     private _foodService: FoodService,
     private _userService: UserService,
+    private _recipeService: RecipeService,
     private _appService: AppService,
     public snackBar: MatSnackBar,
     private _route: ActivatedRoute,
@@ -39,10 +42,13 @@ export class FoodInfoComponent implements OnInit {
     this.food = new Food('','','','', [], 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     this.calculatedFood = new Food('','','','', [], 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     this.quantity = 100;
+    this._appService.setTitle("Detalles");
     this._route.params.subscribe(params => {
       this.foodId = params.id;
       this.date = params.date;
       this.meal = params.meal;
+      this.recipe = params.recipe;
+      console.log(this.recipe);
       this.getFood(this.foodId);
     })
 
@@ -50,7 +56,7 @@ export class FoodInfoComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._appService.setTitle("Detalles");
+    
   }
 
   getFood(id){    
@@ -78,6 +84,21 @@ export class FoodInfoComponent implements OnInit {
           duration: 500,
         });          
         console.log(response.diary);
+      },
+      error => {
+        console.log();
+      }
+    );
+  }
+
+  addIngredientToRecipe(){
+    this._recipeService.addIngredientToRecipe(this.token, this.foodId, this.recipe, this.quantity ).subscribe(
+      response =>{
+        this.router.navigate(['/recipes', this.recipe]);
+        this.snackBar.open("Ingrediente añadido a la receta con exito.", '', {
+          duration: 500,
+        });          
+        console.log(response.recipe);
       },
       error => {
         console.log();

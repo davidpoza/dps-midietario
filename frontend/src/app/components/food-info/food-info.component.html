@@ -35,7 +35,8 @@
             </div>
           </div>
 
-          <button *ngIf="date" mat-raised-button color="primary" (click)="addFoodToDiary()">Añadir</button>
+          <button *ngIf="date && !recipe" mat-raised-button color="primary" (click)="addFoodToDiary()">Añadir</button>
+          <button *ngIf="!date && recipe" mat-raised-button color="primary" (click)="addIngredientToRecipe()">Añadir</button>
         </form>
   </div>
   </div>

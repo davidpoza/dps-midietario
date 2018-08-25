@@ -16,9 +16,11 @@ const appRoutes: Routes = [
     { path: 'diary/:date', component: DiaryComponent},
     { path: 'foods', component: FoodsComponent},
     { path: 'addfood', component: AddFoodFormComponent},
-    { path: 'food/:id/:date/:meal', component: FoodInfoComponent},
-    { path: 'food/:id', component: FoodInfoComponent},
-    { path: 'foods/:date/:meal', component: FoodsComponent},
+    { path: 'food/:id/:date/:meal', component: FoodInfoComponent}, //insertamos alimento en diario
+    { path: 'food/:id/:recipe', component: FoodInfoComponent}, //insertamos alimento en receta
+    { path: 'food/:id', component: FoodInfoComponent}, //simplemente consultamos alimento sin insertalo
+    { path: 'foods/:date/:meal', component: FoodsComponent}, //consulta alimentos para insertar en diario
+    { path: 'foods/:recipe', component: FoodsComponent}, //consulta alimentos para insertar en receta
     { path: 'profile', component: ProfileComponent},
     { path: 'login', component: LoginComponent},
     { path: 'register', component: RegisterUserFormComponent},

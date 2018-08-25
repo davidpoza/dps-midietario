@@ -23,6 +23,7 @@ export class FoodsComponent implements OnInit {
   public identity;
   public date;
   public meal;
+  public recipe;
   public search: String;
 
   constructor(
@@ -37,17 +38,18 @@ export class FoodsComponent implements OnInit {
   ) {
     this.token = this._userService.getToken();
     this.identity = this._userService.getIdentity();
-    
+    this._appService.setTitle("Alimentos");
+    this._appService.setShowMenu(false);
     //pasamos los parametros de la url al siguiente componente de food-info
     this._route.params.subscribe(params => {
       this.date = params.date;
       this.meal = params.meal;
+      this.recipe = params.recipe;
     })
    }
 
   ngOnInit() {
-    this._appService.setTitle("Alimentos");
-    this._appService.setShowMenu(false);
+    
     this.getFoods();
   }
 
@@ -89,11 +91,15 @@ export class FoodsComponent implements OnInit {
     });    
   }
 
-  onClick(food, date, meal){
+  onClick(food, date, meal, recipe){
     /* si le estamos pasando diary y meal como parametros en la url entonces mostramos
     la vista para insertar alimento */
     if(food && date && meal)
       this.router.navigate(['/food', food, date, meal]);
+    // si estamos pasando un id de receta 
+    else if(recipe){
+      this.router.navigate(['/food', food, recipe]);
+    }
     // en caso contrario, mostramos vista que solo da información
     else
       this.router.navigate(['/food', food]);

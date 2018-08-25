@@ -50,7 +50,8 @@ export class RecipeInfoComponent implements OnInit {
     this._recipeService.getRecipe(this.token,id).subscribe(
       response =>{
         this.recipe = response.recipe;
-        this.recipe = this._recipeService.calculateMacros(this.recipe, this.quantity);
+        this.recipe = this._recipeService.calculateIngredientMacros(this.recipe);
+        this.recipe = this._recipeService.calculateRecipeMacros(this.recipe, this.quantity);
         console.log(this.recipe);
       },
       error => {
@@ -61,6 +62,6 @@ export class RecipeInfoComponent implements OnInit {
 
 
   onInput(){
-    this.recipe = this._recipeService.calculateMacros(this.recipe, this.quantity);
+    this.recipe = this._recipeService.calculateRecipeMacros(this.recipe, this.quantity);
   }
 }

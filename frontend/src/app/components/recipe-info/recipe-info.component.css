@@ -60,10 +60,6 @@ h2{
     color: #5ddfc9;
 }
 
-button {
-    width: 100%;
-}
-
 .ingredient_quantity{
     color: #5ddfc9;
     float: right;
@@ -72,6 +68,11 @@ button {
 .ingredient{
     border: 1px solid black;
     border-radius: 5px;
-    padding: 5px;
+    padding: 10px;
+    padding-bottom: 15px;
     margin-bottom: 10px;
+}
+
+.macros span{
+    padding-right: 30px;
 }

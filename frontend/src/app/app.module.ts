@@ -29,6 +29,7 @@ import { FoodInfoComponent } from './components/food-info/food-info.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { RecipesComponent } from './components/recipes/recipes.component';
 import { RecipeInfoComponent } from './components/recipe-info/recipe-info.component';
+import { FoodComponent } from './components/food/food.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { RecipeInfoComponent } from './components/recipe-info/recipe-info.compon
     ProfileComponent,
     RecipesComponent,
     RecipeInfoComponent,
+    FoodComponent,
   ],
   imports: [
     BrowserModule,

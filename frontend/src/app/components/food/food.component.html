@@ -1,0 +1,17 @@
+<h5 [routerLink]="['/food', ingredient.refFood._id]">{{name | uppercase}}
+  <span class="ingredient_quantity">{{quantity}}g.</span>
+</h5>
+
+<button *ngIf="date" style="float: right" mat-icon-button color="primary" (click)="deleteFood(food, meal,index)">
+  <mat-icon>delete</mat-icon>
+</button>
+<button *ngIf="recipe" style="float: right" mat-icon-button color="primary" (click)="deleteIngredient(recipe._id, i)">
+  <mat-icon>delete</mat-icon>
+</button>
+
+<div class="macros">
+  <span><strong>P</strong>: {{protein}}</span>
+  <span><strong>C</strong>: {{carbohydrates}}</span>
+  <span><strong>G</strong>: {{fat}}</span>
+  <span><strong>Cal</strong>: {{kcal}}</span>
+</div>

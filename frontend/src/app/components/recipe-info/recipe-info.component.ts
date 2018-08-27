@@ -65,7 +65,14 @@ export class RecipeInfoComponent implements OnInit {
     this.recipe = this._recipeService.calculateRecipeMacros(this.recipe, this.quantity);
   }
 
-  deleteIngredient(recipe, index){
+  onDeletedIngredient(recipe, index){
+    this.recipe.ingredients.splice(index,1);
+    this.snackBar.open("Ingrediente borrado de la receta con exito.", '', {
+      duration: 500,
+    }); 
+  }
+
+  /*deleteIngredient(recipe, index){
     this._recipeService.deleteIngredientFromRecipe(recipe, index, this.token).subscribe(
       response =>{
         this.recipe.ingredients.splice(index,1);
@@ -78,5 +85,5 @@ export class RecipeInfoComponent implements OnInit {
         console.log();
       }
     );
-  }
+  }*/
 }

@@ -6,21 +6,24 @@
   <div *ngIf="foods==''">
     No hay entradas
   </div>
-  <div class="food" *ngFor="let food of foods; let i = index">
-    <h5>{{food.refFood.name | uppercase}}<span class="quantity">{{food.quantity}}g.</span></h5>
-    <p *ngIf="food.refFood.brand!=''">{{food.refFood.brand}}</p>
-    <button style="float: right" mat-icon-button color="primary" (click)="deleteFood(food.refFood._id, index,i)">
-        <mat-icon>delete</mat-icon>
-    </button>
-    <div class="macros">
-        <span><strong>P</strong>: {{food.refFood.protein}}</span>
-        <span><strong>C</strong>: {{food.refFood.carbohydrates}}</span>
-        <span><strong>G</strong>: {{food.refFood.fat}}</span>
-        <span><strong>Cal</strong>: {{food.refFood.kcal}}</span>
-    </div>
-       
-  </div>
-
+  
+  <food 
+  *ngFor="let food of foods;  let i = index"
+  [name] = "food.refFood.name" 
+  [protein] = "food.refFood.protein"
+  [carbohydrates] = "food.refFood.carbohydrates"
+  [fat] = "food.refFood.fat"
+  [kcal] = "food.refFood.kcal"
+  [quantity] = "food.quantity"
+  [brand] = "food.refFood.brand"
+  [food] = "food.refFood._id"
+  [date] = "date"
+  [meal] = "index"
+  [token] = "token"
+  (deletedFood) = "onDeletedFood(i)"
+>
+</food>
+  
   <div class="addFood" [routerLink]="['/foods', diary, index]">
     + Añadir alimento
   </div>

@@ -46,18 +46,11 @@ export class MealComponent implements OnInit {
     })
   }
 
-  deleteFood(food, meal, index){
-    this._foodService.deleteFoodFromDiary(food,this.date,meal,this.token).subscribe(
-      response =>{
-        this.foods.splice(index,1);
-        this.snackBar.open("Alimento borrado del diario con exito.", '', {
-          duration: 500,
-        });          
-        console.log(response.diary);
-      },
-      error => {
-        console.log();
-      }
-    );
+  onDeletedFood(index){    
+    this.foods.splice(index,1);
+    this.snackBar.open("Alimento borrado del diario con exito.", '', {
+      duration: 500,
+    }); 
   }
+  
 }

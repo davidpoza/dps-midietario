@@ -2,8 +2,9 @@
   <h5 [routerLink]="['/food', food]">{{name | uppercase}}
     <span class="ingredient_quantity">{{quantity}}g.</span>
   </h5>
+  <p *ngIf="brand!=''">{{brand}}</p>
 
-  <button *ngIf="date" style="float: right" mat-icon-button color="primary" (click)="deleteFood(food, meal,index)">
+  <button *ngIf="date" style="float: right" mat-icon-button color="primary" (click)="deleteFood(food, date, meal)">
     <mat-icon>delete</mat-icon>
   </button>
   <button *ngIf="recipe" style="float: right" mat-icon-button color="primary" (click)="deleteIngredient(recipe, index)">

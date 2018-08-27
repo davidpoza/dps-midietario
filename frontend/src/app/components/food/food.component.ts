@@ -36,14 +36,10 @@ export class FoodComponent implements OnInit {
   }
 
 
-  deleteFood(food, meal, index){
-    this._foodService.deleteFoodFromDiary(food,this.date,meal,this.token).subscribe(
+  deleteFood(food, date, meal){
+    this._foodService.deleteFoodFromDiary(food,date,meal,this.token).subscribe(
       response =>{
         this.deletedFood.emit();
-        /*this.foods.splice(index,1);
-        this.snackBar.open("Alimento borrado del diario con exito.", '', {
-          duration: 500,
-        });*/          
         console.log(response.diary);
       },
       error => {
@@ -55,11 +51,7 @@ export class FoodComponent implements OnInit {
   deleteIngredient(recipe, index){
     this._recipeService.deleteIngredientFromRecipe(recipe, index, this.token).subscribe(
       response =>{
-        this.deletedIngredient.emit();
-        /*this.recipe.ingredients.splice(index,1);
-        this.snackBar.open("Ingrediente borrado de la receta con exito.", '', {
-          duration: 500,
-        });  */        
+        this.deletedIngredient.emit();  
         console.log(response.recipe);
       },
       error => {

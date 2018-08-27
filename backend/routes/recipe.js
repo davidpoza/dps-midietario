@@ -15,4 +15,5 @@ router.post('/addingredienttorecipe', /*md_auth.ensureAuth,*/ RecipeController.a
 router.get('/recipes/:id', /*md_auth.ensureAuth,*/ RecipeController.getRecipe);
 router.get('/recipes', /*md_auth.ensureAuth,*/ RecipeController.getRecipes);
 router.put('/recipes/:id', /*md_auth.ensureAuth,*/ RecipeController.updateRecipe);
+router.post('/deleteingredientfromrecipe', /*md_auth.ensureAuth,*/ RecipeController.deleteIngredientFromRecipe);
 module.exports = router;

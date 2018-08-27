@@ -54,6 +54,17 @@ export class RecipeService{
         }
         return this._http.post(this.url+'addingredienttorecipe/', params, {headers:headers});
     }
+
+    /*usamos un metodo post y no un metodo delete porque necesito pasar un objeto json */
+    deleteIngredientFromRecipe(recipe, ingredient_index, token):Observable<any>{
+        let headers = new HttpHeaders().set('Content-Type', 'application/json')
+        .set('Authorization', token);
+        let params = {
+            recipe: recipe,
+            ingredient: ingredient_index
+        };
+        return this._http.post(this.url+'deleteingredientfromrecipe', params, {headers:headers});
+    }
     
     //calcula macros de los ingredientes segun su cantidad
     calculateIngredientMacros(recipe):Recipe{

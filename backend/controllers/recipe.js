@@ -94,34 +94,25 @@ var controller = {
     },
 
     deleteIngredientFromRecipe: function(req,res){
-        var params = req.body;       
-        var foodId = params.food;
-        var mealIndex = params.meal; // el indice del array de meals donde vamos a borrar
-        //obtenemos el diario a partir de la fecha
-        var diaryDate = new Date(params.date);
-        if(!foodId) return res.status(404).send({message: 'No ha indicado alimento a borrar'});
-        if(!diaryDate) return res.status(404).send({message: 'No ha indicado diario'});
-        if(mealIndex==='') return res.status(404).send({message: 'No ha indicado meal'});
-
-        Diary.findOne({date:diaryDate}).exec((err, diary) => {
-            if(err) return res.status(500).send({message: 'Error al seleccionar diario.'});
-            if(!diary) return res.status(404).send({message: 'No existe el diario.'});
+        var params = req.body;
+        var recipe = params.recipe;       
+        var ingredientIndex = params.ingredient; // el indice del array de ingredientes que vamos a borrar
+        
+        if(!recipe) return res.status(404).send({message: 'No ha indicado la receta'});
+        if(!ingredientIndex) return res.status(404).send({message: 'No ha indicado ingrediente a borrar'});
+       
+        Recipe.findOne({_id:recipe}).exec((err, recipe) => {
+            if(err) return res.status(500).send({message: 'Error al seleccionar receta.'});
+            if(!recipe) return res.status(404).send({message: 'No existe la receta.'});
             
-            // borramos el id del alimento correcto   
-            console.log(diary.meals[mealIndex].foods.length);         
-            for (let i = 0; i < diary.meals[mealIndex].foods.length; i++) {  
-                if(diary.meals[mealIndex].foods[i].refFood == foodId){                    
-                    diary.meals[mealIndex].foods.splice(i, 1);   
-                    console.log("borramos comida del diario");
-                }
-                            
-            }
+            // borramos el ingrediente correcto
+            recipe.ingredients.splice(ingredientIndex, 1);
   
-            // actualizamos el diario
-            Diary.findByIdAndUpdate(diary._id, diary, {new:true}, (err, diaryUpdated) => {
-                if(err) return res.status(500).send({message: 'Error al actualizar diario.'});
-                if(!diaryUpdated) return res.status(404).send({message: 'No existe el diario a actualizar'});
-                return res.status(200).send({diary: diaryUpdated})
+            // actualizamos la receta
+            Recipe.findByIdAndUpdate(recipe._id, recipe, {new:true}, (err, recipeUpdated) => {
+                if(err) return res.status(500).send({message: 'Error al actualizar receta.'});
+                if(!recipeUpdated) return res.status(404).send({message: 'No existe la receta a actualizar'});
+                return res.status(200).send({diary: recipeUpdated})
             });  
         });
 

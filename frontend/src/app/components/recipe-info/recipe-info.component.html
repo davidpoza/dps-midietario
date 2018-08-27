@@ -7,8 +7,14 @@
           <h1>{{recipe.name}}</h1>
           
           <h2>Ingredientes</h2>
-          <div *ngFor="let ingredient of recipe.ingredients" class="ingredient">
-              <h5 [routerLink]="['/food', ingredient.refFood._id]">{{ingredient.refFood.name | uppercase}}<span class="ingredient_quantity">{{ingredient.quantity}}g.</span></h5>
+          <div *ngFor="let ingredient of recipe.ingredients;  let i = index" class="ingredient">
+              <h5 [routerLink]="['/food', ingredient.refFood._id]">{{ingredient.refFood.name | uppercase}}
+                <span class="ingredient_quantity">{{ingredient.quantity}}g.
+                    
+                </span>
+            </h5><button  mat-icon-button color="primary" (click)="deleteIngredient(recipe._id, i)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
               <div mat-line class="container">
                 <div class="row">
       

@@ -32,6 +32,8 @@ import { RecipeInfoComponent } from './components/recipe-info/recipe-info.compon
 import { FoodComponent } from './components/food/food.component';
 import { AddRecipeFormComponent } from './components/add-recipe-form/add-recipe-form.component';
 
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+ 
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,7 +49,7 @@ import { AddRecipeFormComponent } from './components/add-recipe-form/add-recipe-
     RecipesComponent,
     RecipeInfoComponent,
     FoodComponent,
-    AddRecipeFormComponent,
+    AddRecipeFormComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +67,10 @@ import { AddRecipeFormComponent } from './components/add-recipe-form/add-recipe-
     MatDialogModule,
     MatSelectModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    FroalaEditorModule.forRoot(), 
+    FroalaViewModule.forRoot()
+    
   ],
   entryComponents: [
     ConfirmationDialogComponent,

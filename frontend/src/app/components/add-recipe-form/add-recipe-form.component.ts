@@ -4,7 +4,7 @@ import { UserService } from '../../../services/user.service';
 import { AppService } from '../../../services/app.service';
 import { FoodService } from '../../../services/food.service';
 import { Global } from '../../../services/global';
-
+import * as $ from 'jquery';
 import { MatSnackBar } from '@angular/material';
 
 @Component({
@@ -19,8 +19,10 @@ export class AddRecipeFormComponent implements OnInit {
   public identity;
   public recipe: Recipe;
   public url:string;
-
-
+  public froalaOptions: Object = {
+    placeholderText: 'Descripción para realizar la receta',
+    toolbarButtons: ['bold', 'italic', 'underline', 'paragraphFormat', 'emoticons', 'undo', 'redo', 'fullscreen'],
+  }
   constructor(
     private _foodService: FoodService,
     private _userService: UserService,

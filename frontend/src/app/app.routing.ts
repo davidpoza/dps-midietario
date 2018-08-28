@@ -10,12 +10,14 @@ import { FoodInfoComponent } from './components/food-info/food-info.component';
 import { RegisterUserFormComponent } from './components/register-user-form/register-user-form.component';
 import { RecipesComponent } from './components/recipes/recipes.component';
 import { RecipeInfoComponent } from './components/recipe-info/recipe-info.component';
+import { AddRecipeFormComponent } from './components/add-recipe-form/add-recipe-form.component';
 
 const appRoutes: Routes = [
     { path: '', component: DiaryComponent},
     { path: 'diary/:date', component: DiaryComponent},
     { path: 'foods', component: FoodsComponent},
     { path: 'addfood', component: AddFoodFormComponent},
+    { path: 'addrecipe', component: AddRecipeFormComponent},
     { path: 'food/:id/:date/:meal', component: FoodInfoComponent}, //insertamos alimento en diario
     { path: 'food/:id/:recipe', component: FoodInfoComponent}, //insertamos alimento en receta
     { path: 'food/:id', component: FoodInfoComponent}, //simplemente consultamos alimento sin insertalo

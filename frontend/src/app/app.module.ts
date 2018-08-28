@@ -30,6 +30,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { RecipesComponent } from './components/recipes/recipes.component';
 import { RecipeInfoComponent } from './components/recipe-info/recipe-info.component';
 import { FoodComponent } from './components/food/food.component';
+import { AddRecipeFormComponent } from './components/add-recipe-form/add-recipe-form.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { FoodComponent } from './components/food/food.component';
     RecipesComponent,
     RecipeInfoComponent,
     FoodComponent,
+    AddRecipeFormComponent,
   ],
   imports: [
     BrowserModule,

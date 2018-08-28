@@ -1,0 +1,13 @@
+.addrecipe{
+    
+    padding: 10px;
+    margin-top: 20%;
+}
+
+.addrecipe > *{
+    width: 100%;
+}
+
+.addrecipe h1{
+    margin-bottom: 30px;
+}

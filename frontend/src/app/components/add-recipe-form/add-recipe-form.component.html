@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col col-lg-6 ">
+              
+      <form #addRecipeForm="ngForm" class="addrecipe">
+        <h1>Crear nueva receta</h1>
+        <mat-form-field>
+          <input name="name" matInput placeholder="Nombre de la receta" [(ngModel)]="recipe.name" required>
+        </mat-form-field>
+
+        
+
+        <p>
+          Imagen<br />
+          <input type="file" name="image" placeholder="imagen" (change)="fileChangeEvent($event)">
+
+        </p>
+          
+        
+
+        <button mat-raised-button color="primary" (click) = "onClick(addRecipeForm)" [disabled]="!addRecipeForm.form.valid" >Crear</button> 
+      </form>
+</div>
+</div>

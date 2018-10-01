@@ -121,8 +121,9 @@ export class DiaryComponent implements OnInit {
     var diary = { date: dateString };
     this._diaryService.createDiary(this.token, diary).subscribe(
       response =>{
-        this.getDiary();
-        this.calculateMacros();
+          this.getDiary();
+          //this.calculateMacros();
+                
       },
       error => {
         this.diary = null;

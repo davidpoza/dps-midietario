@@ -118,6 +118,15 @@ var controller = {
 
         
     },
+
+    deleteRecipe: function(req,res){
+        var recipeId = req.params.id;
+        Recipe.findByIdAndRemove(recipeId, (err, recipeDeleted) => {
+            if(err) return res.status(500).send({message: 'Error al borrar receta.'});
+            if(!recipeDeleted) return res.status(404).send({message: 'No existe la receta a borrar'});            
+            return res.status(200).send({recipe: recipeDeleted});
+        });      
+    },
 }
 
 module.exports = controller;

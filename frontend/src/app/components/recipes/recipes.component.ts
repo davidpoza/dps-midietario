@@ -27,6 +27,8 @@ export class RecipesComponent implements OnInit {
     private _userService: UserService,
     private _appService: AppService,
     private _recipeService: RecipeService,
+    public dialog: MatDialog,
+    public snackBar: MatSnackBar,
   ) {
     this.token = this._userService.getToken();
     this.identity = this._userService.getIdentity();
@@ -52,4 +54,36 @@ export class RecipesComponent implements OnInit {
       }
     );
   }
+
+  deleteRecipe(id,i){
+    let dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data:{message: '¿Desea borrar el alimento?'}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if(result) {
+        // ha pulsado SI, borramos
+        this._recipeService.deleteRecipe(id,this.token).subscribe(
+          response =>{
+            //this.recipes.splice(i,1);
+            this.getRecipes();
+            this.snackBar.open("Receta borrada con exito.", '', {
+              duration: 500,
+            });          
+          },
+          error => {
+            this.snackBar.open(error.error.message, '', {
+              duration: 500,
+            });
+          }
+        );
+      }
+
+    });    
+  }
+
+  onSearch(){
+    this.recipes = this.recipes_copy.slice(); //recuperamos siempre una copia de la lista completa
+    this.recipes = this.recipes.filter(recipe => recipe.name.toLowerCase().includes(<string>this.search.toLowerCase()));     
+  }
+
 }

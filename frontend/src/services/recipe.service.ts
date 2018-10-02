@@ -50,6 +50,12 @@ export class RecipeService{
         return this._http.post(this.url+'recipes/', recipe, {headers:headers});
     }
 
+    deleteRecipe(recipeId,token):Observable<any>{
+        let headers = new HttpHeaders().set('Content-Type', 'application/json')
+        .set('Authorization', token);
+        return this._http.delete(this.url+'recipes/'+recipeId, {headers:headers});
+    }
+
     addIngredientToRecipe(token, food, recipe, quantity):Observable<any>{
         let headers = new HttpHeaders().set('Content-Type', 'application/json')
             .set('Authorization', token);

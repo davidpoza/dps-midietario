@@ -9,7 +9,7 @@
       <h4 mat-line [routerLink]="['/recipes', recipe._id]">{{recipe.name}}</h4>
       
       
-      <button mat-icon-button color="primary" (click)="deleteList(food._id,i)">
+      <button mat-icon-button color="primary" (click)="deleteRecipe(recipe._id,i)">
           <mat-icon>delete</mat-icon>
       </button>&nbsp;
       

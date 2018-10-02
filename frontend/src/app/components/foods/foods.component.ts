@@ -76,6 +76,7 @@ export class FoodsComponent implements OnInit {
         this._foodService.deleteFood(id,this.token).subscribe(
           response =>{
             this.foods.splice(i,1);
+            this.getFoods();
             this.snackBar.open("Alimento borrado con exito.", '', {
               duration: 500,
             });          

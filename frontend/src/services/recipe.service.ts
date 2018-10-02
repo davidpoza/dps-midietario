@@ -43,6 +43,12 @@ export class RecipeService{
         return this._http.post(this.url+'diaries/', params, {headers:headers});
     }
 
+    addRecipe(token, recipe):Observable<any>{
+        let headers = new HttpHeaders().set('Content-Type', 'application/json')
+            .set('Authorization', token);
+        
+        return this._http.post(this.url+'recipes/', recipe, {headers:headers});
+    }
 
     addIngredientToRecipe(token, food, recipe, quantity):Observable<any>{
         let headers = new HttpHeaders().set('Content-Type', 'application/json')

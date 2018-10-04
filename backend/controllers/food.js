@@ -19,6 +19,9 @@ var controller = {
         var food = new Food();
         var params = req.body;
         food.name = params.name;
+        if(params.recipe_id)
+            food.recipe_id = params.recipe_id;
+        food.image = params.image;
         food.soldin = params.soldin;
         food.brand = params.brand;
         food.kgprice = params.kgprice;

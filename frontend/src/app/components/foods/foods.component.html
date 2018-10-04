@@ -6,7 +6,7 @@
   <div *ngFor="let food of foods; let i = index" class="item">
   <mat-list-item  >
       <mat-icon mat-list-icon (click)="onClick(food._id, date, meal, recipe)">label</mat-icon>
-      <h4 mat-line (click)="onClick(food._id, date, meal, recipe)">{{food.name}}<span *ngIf="food.brand"> - {{food.brand}}</span></h4>
+      <h4 mat-line (click)="onClick(food._id, date, meal, recipe)">{{food.name}}<mat-icon *ngIf="food.recipe_id" mat-list-icon style="vertical-align:middle">list_alt</mat-icon><span *ngIf="food.brand"> - {{food.brand}}</span></h4>
       <div mat-line class="container">
           <div class="row">
 

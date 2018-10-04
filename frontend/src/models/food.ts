@@ -1,6 +1,7 @@
 export class Food{
     constructor(
         public _id: string,
+        public recipe_id: string,
         public name: string,
         public image: string,
         public brand: string,

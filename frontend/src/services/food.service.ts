@@ -71,7 +71,7 @@ export class FoodService{
     }
 
     calculateFoodNutrient(food, quantity){
-        var food_result = new Food('','','','', [], 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        var food_result = new Food('','','','','', [], 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
         food_result.protein = food.protein * quantity / 100;
         food_result.carbohydrates = food.carbohydrates * quantity / 100;
         food_result.fat = food.fat * quantity / 100;

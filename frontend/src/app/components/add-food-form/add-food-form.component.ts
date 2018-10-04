@@ -30,7 +30,7 @@ export class AddFoodFormComponent implements OnInit {
     this.url = Global.url;
     this.token = this._userService.getToken();
     this.identity = this._userService.getIdentity();
-    this.food = new Food('','','','', [], 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    this.food = new Food('','','','', '', [], 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
   }
 
   ngOnInit() {

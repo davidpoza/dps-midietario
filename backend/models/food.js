@@ -5,6 +5,7 @@ var Schema = mongoose.Schema;
 
 var FoodSchema = Schema({
     name: String,
+    recipe_id: Schema.Types.ObjectId,
     image: String,
     brand: String,
     soldin: Array,

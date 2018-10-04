@@ -4,6 +4,7 @@ var Food = require('../models/food')
 var User = require('../models/user')
 var fs = require('fs');
 var path = require('path');
+const sharp = require('sharp');
 var config = require('../config');
 
 var controller = {
@@ -126,6 +127,41 @@ var controller = {
             if(!recipeDeleted) return res.status(404).send({message: 'No existe la receta a borrar'});            
             return res.status(200).send({recipe: recipeDeleted});
         });      
+    },
+    /*la imagen se sube con el middleware multiparty*/
+    uploadImage: function(req,res){
+        var recipeId = req.params.id;
+        var fileName = "Imagen no subida";
+
+        if(req.files){
+            var filePath = req.files.image.path;
+            //var fileSplit = filePath.split("/");
+            var fileSplit = filePath.split("\\");
+            var fileName = fileSplit[1];
+
+            //redimensionamos la imagen
+            sharp(req.files.image.path)
+            .resize(1024) //1024px
+            .toBuffer()
+            .then( data => {
+                fs.writeFileSync(req.files.image.path, data);
+                Recipe.findByIdAndUpdate(recipeId, {image: fileName},{new:true}, (err, recipeUpdated) => {
+                    if(err) return res.status(500).send({message: 'La imagen no se ha subido.'});
+                    if(!recipeUpdated) return res.status(404).send({message: 'La receta no existe.'});
+                    return res.status(200).send({
+                        item: recipeUpdated
+                    });
+                })
+            })
+            .catch( err => {
+                console.log(err);
+            });            
+        }
+        else{
+            return res.status(500).send({
+                message: fileName
+            });
+        }
     },
 }
 

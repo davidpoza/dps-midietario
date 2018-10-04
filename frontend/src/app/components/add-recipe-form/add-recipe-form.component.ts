@@ -45,9 +45,9 @@ export class AddRecipeFormComponent implements OnInit {
     this._recipeService.addRecipe(this.token, this.recipe).subscribe(
       response => {
         if(this.filesToUpload) {
-          //this._foodService.makeFileRequest(this.url+"uploadfoodimage/"+ response.food._id, [], this.filesToUpload, "image", this.token).then((result:any) => {
-          //  console.log("imagen subida con exito");              
-          //});
+          this._recipeService.makeFileRequest(this.url+"uploadrecipeimage/"+ response.recipe._id, [], this.filesToUpload, "image", this.token).then((result:any) => {
+            console.log("imagen subida con exito");              
+          });
         }
         this.snackBar.open("Receta añadida con exito.", '', {
           duration: 500,

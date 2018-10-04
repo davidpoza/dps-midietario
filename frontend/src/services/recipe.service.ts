@@ -136,4 +136,35 @@ export class RecipeService{
         return result_recipe;
     }
     
+    /* Creamos un objeto ajax contra la url de subida de ficheros
+     y un objeto formulario donde añadimos todos los ficheros.
+     
+     Llamaremos a esta url del api justo despues de haber añadido un alimento
+     con exito.*/
+     makeFileRequest(url: string, params: Array<string>, files: Array<File>, name: string, token){
+        return new Promise(function(resolve, reject){
+            var formData: any = new FormData();
+            var xhr = new XMLHttpRequest();
+
+            for(var i = 0; i < files.length; i++){
+                formData.append(name, files[i], files[i].name);
+            }
+
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState == 4){
+                    if(xhr.status == 200){
+                        resolve(JSON.parse(xhr.response));
+                    }
+                    else{
+                        reject(xhr.response);
+                    }
+                }
+            }
+
+            xhr.open("POST", url, true);
+            //añadimos la cabecera de autorizacion
+            xhr.setRequestHeader('Authorization',token);
+            xhr.send(formData);
+        });
+    }
 }

@@ -6,6 +6,11 @@
         <form #addFoodForm="ngForm" class="addfood">
           <h1>{{recipe.name}}</h1>
           
+          <div *ngIf="recipe.description">
+            <h2>Preparación</h2>
+            <div [innerHTML]="recipe.description | safeHtml" ></div>
+          </div>
+
           <h2>Ingredientes</h2>
           <food 
             *ngFor="let ingredient of recipe.ingredients;  let i = index"

@@ -31,6 +31,7 @@ import { RecipesComponent } from './components/recipes/recipes.component';
 import { RecipeInfoComponent } from './components/recipe-info/recipe-info.component';
 import { FoodComponent } from './components/food/food.component';
 import { AddRecipeFormComponent } from './components/add-recipe-form/add-recipe-form.component';
+import { SafeHtmlPipe } from './pipes/safehtml.pipe';
 
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
  
@@ -49,7 +50,8 @@ import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
     RecipesComponent,
     RecipeInfoComponent,
     FoodComponent,
-    AddRecipeFormComponent
+    AddRecipeFormComponent,
+    SafeHtmlPipe
   ],
   imports: [
     BrowserModule,

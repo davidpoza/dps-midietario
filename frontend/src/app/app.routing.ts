@@ -17,6 +17,7 @@ const appRoutes: Routes = [
     { path: 'diary/:date', component: DiaryComponent},
     { path: 'foods', component: FoodsComponent},
     { path: 'addfood', component: AddFoodFormComponent},
+    { path: 'addfood/:id', component: AddFoodFormComponent}, //reutilizamos el formulario de creacion para la modificacion
     { path: 'addrecipe', component: AddRecipeFormComponent},
     { path: 'food/:id/:date/:meal', component: FoodInfoComponent}, //insertamos alimento en diario
     { path: 'food/:id/:recipe', component: FoodInfoComponent}, //insertamos alimento en receta

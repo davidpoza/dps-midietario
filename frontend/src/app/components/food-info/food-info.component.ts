@@ -39,8 +39,8 @@ export class FoodInfoComponent implements OnInit {
     this.url = Global.url;
     this.token = this._userService.getToken();
     this.identity = this._userService.getIdentity();
-    this.food = new Food('','','','', [], 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-    this.calculatedFood = new Food('','','','', [], 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    this.food = new Food('','','', '','', [], 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    this.calculatedFood = new Food('','', '','','', [], 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     this.quantity = 100;
     this._appService.setTitle("Detalles");
     this._route.params.subscribe(params => {
@@ -48,7 +48,6 @@ export class FoodInfoComponent implements OnInit {
       this.date = params.date;
       this.meal = params.meal;
       this.recipe = params.recipe;
-      console.log(this.recipe);
       this.getFood(this.foodId);
     })
 

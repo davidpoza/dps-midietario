@@ -3,7 +3,8 @@
       <div class="col col-lg-6 ">
                 
         <form #addFoodForm="ngForm" class="addfood">
-          <h1>Crear nuevo alimento</h1>
+          <h1 *ngIf="!foodId">Crear nuevo alimento</h1>
+          <h1 *ngIf="foodId">Modificar alimento</h1>
           <mat-form-field>
             <input name="name" matInput placeholder="Nombre del alimento" [(ngModel)]="food.name" required>
           </mat-form-field>
@@ -40,7 +41,8 @@
             
           
   
-          <button mat-raised-button color="primary" (click) = "onClick(addFoodForm)" [disabled]="!addFoodForm.form.valid" >Crear</button> 
+          <button mat-raised-button color="primary" *ngIf="!foodId" (click) = "create(addFoodForm)" [disabled]="!addFoodForm.form.valid" >Crear</button>
+          <button mat-raised-button color="primary" *ngIf="foodId" (click) = "save(addFoodForm)" [disabled]="!addFoodForm.form.valid" >Guardar cambios</button> 
         </form>
   </div>
   </div>

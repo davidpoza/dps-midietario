@@ -174,6 +174,16 @@ var controller = {
             .toBuffer()
             .then( data => {
                 fs.writeFileSync(req.files.image.path, data);
+                
+                //antes de subir la nueva foto comprobamos si hay una anterior y en tal caso la borramos
+                Food.findById(foodId).exec((err, food) => {                    
+                    if(food.image){
+                        console.log("borramos: "+__dirname+"\\..\\uploads\\"+food.image);
+                        //fs.unlinkSync(__dirname+"\\..\\uploads\\"+food.image);
+                    }
+                });
+                
+                
                 Food.findByIdAndUpdate(foodId, {image: fileName},{new:true}, (err, foodUpdated) => {
                     if(err) return res.status(500).send({message: 'La imagen no se ha subido.'});
                     if(!foodUpdated) return res.status(404).send({message: 'El alimento no existe.'});
